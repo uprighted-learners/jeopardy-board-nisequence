@@ -1,0 +1,382 @@
+#landingBody {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 25vw 50vw 25vw;
+    grid-template-rows: 5vh 10vh 60vh 5vh 15vh 5vh;
+}
+
+.roundBody {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+    grid-template-rows: 15vh 11vh 12vh 12vh 12vh 12vh 12vh 4vh 4vh 4vh;
+}
+
+#welcomeHeader {
+    display: grid;
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    align-items:center;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    color:white;
+}
+
+.roundHeader {
+    display: grid;
+    grid-column: 3 / span 2;
+    grid-row: 1 / span 1;
+    align-items:center;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    color: white;
+}
+
+.roundName {
+    text-decoration: underline;
+    text-underline-offset: 0.4vw;
+}
+
+.points {
+    display: grid;
+    grid-column: 1 / span 6;
+    grid-row: 1;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.aName {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+    color:red;
+    text-decoration: underline;
+}
+
+.bName {
+    display: grid;
+    grid-column: 6;
+    grid-row: 1;
+    text-align: right;
+    color:rgb(136, 200, 221);
+    text-decoration: underline;
+}
+
+.aPts {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+    color:red;
+    margin-top: 5rem;
+}
+
+.bPts {
+    display: grid;
+    grid-column: 6 / span 1;
+    grid-row: 1;
+    text-align: right;
+    margin-top: 5rem;
+    color:rgb(136, 200, 221);
+}
+
+#jeopardyLogo {
+    display: grid;
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 1;
+    align-items: center;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+#jeopardyLogo:hover {
+    image-orientation: flip;
+    transform: rotateY(180deg);
+}
+
+#jeopardyLogoback {
+    display: grid;
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 1;
+    align-items: center;
+    margin-left: auto;
+    margin-right:auto;
+    transform: rotateY(180deg);
+    image-orientation: flip;
+}
+
+.categories {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 6;
+    align-items: center;
+    color:white;
+    text-decoration: underline;
+    text-underline-offset: 0.5em;
+    align-self: center;
+}
+
+.cat1 {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 1;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: blue;
+    padding-top:3vh;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+}
+
+.cat2 {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 2;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: blue;
+    padding-top:3vh;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+}
+
+.cat3 {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 3;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: blue;
+    padding-top:3vh;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+}
+
+.cat4 {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 4;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: blue;
+    padding-top:3vh;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+}
+
+.cat5 {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 5;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: blue;
+    padding-top:3vh;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+}
+
+.cat6 {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 6;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: blue;
+    padding-top:3vh;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+}
+/* question section here */
+.questions {
+    display: flex;
+    grid-row: 3 / span 5;
+    grid-column: 1 / span 6;
+    color:rgb(255, 213, 0);
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.questionCard {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    background-color: blue;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+    text-align: center;
+    margin: 0.4em;
+}
+
+.questionCard:hover {
+    color: darkred;
+    border: 0px;
+}
+
+.answerSection {
+    display: flex;
+    flex-direction: row;
+    grid-row: 8;
+    grid-column: 3 / span 2;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.answerHere {
+    color:white;
+}
+
+#startGame {
+    display: grid;
+    grid-column: 2 / span 1;
+    grid-row: 4 / span 1;
+    background-color: darkred;
+    color:white;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    text-decoration: none;
+}
+
+#startGame:hover {
+    background-color:rgb(28, 0, 128);
+}
+
+.buttonSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    grid-row: 9;
+    grid-column: 3 / span 2;
+}
+
+.lilButton {
+    color: rgb(255, 213, 0);
+    background-color: darkred;
+    padding-top: 0.01em;
+    padding-bottom: 0.01rem;
+    margin-top: 0.75vh;
+    margin-bottom: 0.75vh;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+    text-decoration: none;
+}
+
+.lilButton:hover {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#landingFooter {
+    display: grid;
+    grid-column: 1 / span 3;
+    grid-row: 6;
+    color: white;
+}
+
+footer {
+    display: grid;
+    grid-column: 1 / span 3;
+    grid-row: 10;
+    color: white;
+    align-items: center;
+}
+
+/* all final round stuff down here */
+
+#finalCat {
+    color:white;
+    display: grid;
+    grid-column: 1 / span 6;
+    grid-row: 2 / span 2;
+    text-align: center;
+    background-color: blue;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    align-items: center;
+    text-decoration: underline;
+    text-underline-offset: 0.4vh;
+}
+
+#finalQues {
+    color:white;
+    display: grid;
+    grid-column: 1 / span 6;
+    grid-row: 4 / span 3;
+    text-align: center;
+    background-color: blue;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 5vh;
+    align-items: center;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+#pointsAtStake {
+    color:white;
+    grid-column: 2 / span 4;
+    grid-row: 7;
+    display: flex;
+    align-items: center;
+    margin-top: 5vh;
+    justify-content: space-evenly;
+}
+
+#finalAnswer {
+    color: darkred;
+    grid-column: 2 / span 4;
+    grid-row: 8;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 2.5vh;
+}
+
+#submit {
+    grid-column: 3 / span 2;
+    grid-row: 9;
+    margin-right: auto;
+    margin-left: auto;
+}

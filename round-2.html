@@ -4,12 +4,75 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
     <title>Jeopardy</title>
     <script src="./scripts/index.js" type="module"></script>
   </head>
-  <body>
-    <h1>Second Round</h1>
+  <body class="roundBody">
+    <header class="roundHeader">
+      <h1 class="roundName">Jeopardy: Round Two</h1><br>
+      <h2>>>> Team B <<<</h2>
+    </header>
+    <section class="points">
+      <h3 class="aName">Team A</h3>
+      <h3 class="bName">Team B</h3>
+      <h2 class="aPts">0 PTS</h2>
+      <h2 class="bPts">0 PTS</h2>
+    </section>
+    <section class="categories">
+      <h1 class="cat1">Category 1</h1>
+      <h1 class="cat2">Category 2</h1>
+      <h1 class="cat3">Category 3</h1>
+      <h1 class="cat4">Category 4</h1>
+      <h1 class="cat5">Category 5</h1>
+      <h1 class="cat6">Category 6</h1>
+    </section>
+    <section class="questions">
+      <!-- question boxes here! -->
+      <h1 class="questionCard">400</h1>
+      <h1 class="questionCard">800</h1>
+      <h1 class="questionCard">1200</h1>
+      <h1 class="questionCard">1600</h1>
+      <h1 class="questionCard">2000</h1>
+      <h1 class="questionCard">400</h1>
+      <h1 class="questionCard">800</h1>
+      <h1 class="questionCard">1200</h1>
+      <h1 class="questionCard">1600</h1>
+      <h1 class="questionCard">2000</h1>
+      <h1 class="questionCard">400</h1>
+      <h1 class="questionCard">800</h1>
+      <h1 class="questionCard">1200</h1>
+      <h1 class="questionCard">1600</h1>
+      <h1 class="questionCard">2000</h1>
+      <h1 class="questionCard">400</h1>
+      <h1 class="questionCard">800</h1>
+      <h1 class="questionCard">1200</h1>
+      <h1 class="questionCard">1600</h1>
+      <h1 class="questionCard">2000</h1>
+      <h1 class="questionCard">400</h1>
+      <h1 class="questionCard">800</h1>
+      <h1 class="questionCard">1200</h1>
+      <h1 class="questionCard">1600</h1>
+      <h1 class="questionCard">2000</h1>
+      <h1 class="questionCard">400</h1>
+      <h1 class="questionCard">800</h1>
+      <h1 class="questionCard">1200</h1>
+      <h1 class="questionCard">1600</h1>
+      <h1 class="questionCard">2000</h1>
+    </section>
+    <section class="answerSection">
+      <h3 class="answerHere">ANSWER:</h3>
+      <input type="text" name="answer" id="answerBox" style="resize:horizontal; width:15vw;">
+      <input type="submit" class=guessButton value="GUESS" style="resize:vertical; height:3vh; width:10vw;">
+    </section>
+    <section class="buttonSection">
+      <a href="final-jeopardy.html" class="lilButton"><h3 class="lilButton" id="pass1">PASS</h3></a>
+      <a href="final-jeopardy.html" class="lilButton"><h3 class="lilButton" id="next1">NEXT >></h3></a>
+    </section>
     <!-- Do not change the script source. Allows import/export to work. -->
     <script src="./scripts/index.js" type="module"></script>
+    <footer>
+      Coded by GitHub user nisequence, aka Nicole ~ Enjoy!
+    </footer>
   </body>
 </html>
