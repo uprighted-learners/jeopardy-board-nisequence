@@ -99,17 +99,6 @@
     transform: rotateY(180deg);
 }
 
-#jeopardyLogoback {
-    display: grid;
-    grid-column: 2 / span 1;
-    grid-row: 3 / span 1;
-    align-items: center;
-    margin-left: auto;
-    margin-right:auto;
-    transform: rotateY(180deg);
-    image-orientation: flip;
-}
-
 .categories {
     display: grid;
     grid-row: 2 / span 1;
@@ -266,10 +255,16 @@
     margin-bottom: auto;
     text-align: center;
     text-decoration: none;
+    border-color: black;
+    border-width: 0.2vw;
+    border-style: solid;
 }
 
 #startGame:hover {
     background-color:rgb(28, 0, 128);
+    border-color: white;
+    border-width: 0.2vw;
+    border-style: solid;
 }
 
 .buttonSection {
@@ -380,4 +375,5 @@ footer {
     margin-right: auto;
     margin-left: auto;
     display: none;
+    /* hidden for now! */
 }
