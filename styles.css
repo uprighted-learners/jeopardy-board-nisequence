@@ -1,11 +1,3 @@
-/* 
-! STAFF COMMENTS
-Functionality:
-Footer text isn't centered.
-Some hover elements obstruct other elements, not "wrong" exactly, but not the best UI design long-term.
-Need to be more vw/vh based
-*/
-
 /** INDEX (HOME) CSS */
 
 #landingBody {
@@ -35,14 +27,6 @@ Need to be more vw/vh based
     margin-left:auto;
     margin-right:auto;
 }
-
-/* 
-#jeopardyLogo:hover {
-    image-orientation: flip;
-    transform: rotateY(180deg);
-}
-! test
-*/
 
 #startGame {
     display: grid;
@@ -77,6 +61,21 @@ Need to be more vw/vh based
 }
 
 /** ROUND CSS */
+/* ! may need to rethink / check row widths
+    - awkward fit for 2nd monitor
+       *- check to see what is NOT vw/vh based
+        - cannot read team point values
+        - cannot read which team is up
+        - extra space at top of screen
+        - buttons "pass" and "next" overlap answer box
+        - 1000 pt question cards from cats 3 & 4 slightly overlap answer box
+        - guess button looks stupid
+        - category headers are tight, but I can get over that
+    - extra space between 1000 pt questions and answer on screen 1
+        - otherwise fits very well
+    - based on how this goes, may need to create new body id for final round page (check after)
+        - only issue, there is no button to submit final answer LOL
+*/
 
 .roundBody {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
