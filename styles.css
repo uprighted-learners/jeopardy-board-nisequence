@@ -4,8 +4,8 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: black;
     display: grid;
-    grid-template-columns: 25vw 50vw 25vw;
-    grid-template-rows: 5vh 10vh 60vh 5vh 15vh 5vh;
+    grid-template-columns: 24vw 49vw 24vw;
+    grid-template-rows: 5vh 10vh 60vh 5vh 15vh 3vh;
 }
 
 #welcomeHeader {
@@ -61,34 +61,24 @@
 }
 
 /** ROUND CSS */
-/* ! may need to rethink / check row widths
-    - awkward fit for 2nd monitor
-       *- check to see what is NOT vw/vh based
-        - cannot read team point values
-        - cannot read which team is up
-        - extra space at top of screen
-        - buttons "pass" and "next" overlap answer box
-        - 1000 pt question cards from cats 3 & 4 slightly overlap answer box
-        - guess button looks stupid
-        - category headers are tight, but I can get over that
-    - extra space between 1000 pt questions and answer on screen 1
-        - otherwise fits very well
-    - based on how this goes, may need to create new body id for final round page (check after)
-        - only issue, there is no button to submit final answer LOL
-*/
 
+/* separate class for roundBody so that flex display is not disturbed by css changes to index */
 .roundBody {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: black;
     display: grid;
     grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
-    grid-template-rows: 15vh 11vh 12vh 12vh 12vh 12vh 12vh 4vh 4vh 4vh;
+    /* columns are evenly distributed */
+    grid-template-rows: 8vh 6vh 17vh 10.5vh 10.5vh 10.5vh 10.5vh 10.5vh 6vh 4vh 4vh;
+    /* rows are very specifically defined to fit their elements based on viewport */
+    /* ! not quite mobile friendly (maybe someday) */
 }
 
+/* roundHeader: <section> that contains Jeopardy Round Name & which Team is up */
 .roundHeader {
     display: grid;
     grid-column: 2 / span 4;
-    grid-row: 1 / span 1;
+    grid-row: 1 / span 2;
     align-items:center;
     text-align: center;
     margin-left:auto;
@@ -97,17 +87,26 @@
 }
 
 .roundName {
+    grid-row: 1 / span 1;
     text-decoration: underline;
     text-underline-offset: 0.4vw;
+}
+
+#teamUp {
+    display: grid;
+    grid-row: 2 / span 1;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 2vh;
 }
 
 /* points: <section> class name */
 .points {
     display: grid;
     grid-column: 1 / span 6;
-    grid-row: 1;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    grid-row: 1 / span 2;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 /* how to display name of Team A */
@@ -133,115 +132,119 @@
 /* points for Team A */
 .aPts {
     display: grid;
-    grid-column: 1;
-    grid-row: 1;
+    grid-column: 1 / span 1;
+    grid-row: 2;
     text-align: left;
     color:red;
-    margin-top: 5rem;
 }
 
 /* points for Team B */
 .bPts {
     display: grid;
     grid-column: 6 / span 1;
-    grid-row: 1;
+    grid-row: 2;
     text-align: right;
-    margin-top: 5rem;
     color:rgb(136, 200, 221);
 }
 
 /* categories: <section> class name */
 .categories {
     display: grid;
-    grid-row: 2 / span 1;
+    grid-row: 3 / span 1;
     grid-column: 1 / span 6;
-    align-items: center;
     color:white;
-    text-decoration: underline;
-    text-underline-offset: 0.5em;
+    text-underline-offset: 0.2rem;
     align-self: center;
     font-size: small;
+    font-weight: bold;
 }
 
 /* class for category headers */
 .catHead {
-    display: grid;
-    grid-row: 2 / span 1;
-    margin-left: auto;
-    margin-right:auto;
+    text-decoration: underline;
+    display:grid;
+    text-align: center;
+    align-content: space-evenly;
     background-color: blue;
-    padding-top:3vh;
-    padding-bottom: 3vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    margin-top: 0.01vh;
+    margin-bottom: 0.01vh;
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
     border: 2px;
     border-style: solid;
     border-color: rgb(255, 213, 0);
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-left: 1.75vw;
+    padding-right: 1.75vw;
 }
 
-/* 6 category headers */
+/* 6 category headers in separate columns */
 #cat1 {
     grid-column: 1;
 }
-
 #cat2 {
     grid-column: 2;
 }
-
 #cat3 {
     grid-column: 3;
 }
-
 #cat4 {
     grid-column: 4;
 }
-
 #cat5 {
     grid-column: 5;
 }
-
 #cat6 {
     grid-column: 6;
 }
 
-/* questions1: <section> id name for questions from category 1 */
+/* questions#: <section> id name for questions from category # */
 #questions1 {
     grid-column: 1 / span 1;
+    grid-row: 4 / span 5;
 }
 
 #questions2 {
     grid-column: 2 / span 1;
+    grid-row: 4 / span 5;
 }
 
 #questions3 {
     grid-column: 3 / span 1;
+    grid-row: 4 / span 5;
 }
 
 #questions4 {
     grid-column: 4 / span 1;
+    grid-row: 4 / span 5;
 }
 
 #questions5 {
     grid-column: 5 / span 1;
+    grid-row: 4 / span 5;
 }
 
 #questions6 {
     grid-column: 6 / span 1;
+    grid-row: 4 / span 5;
 }
 
+/* .question card: class for each card w/ the point values */
 .questionCard {
-    padding-top: 3vh;
-    padding-bottom: 3vh;
+    display: grid;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
     background-color: blue;
     border: 2px;
     border-style: solid;
     border-color: rgb(255, 213, 0);
     color: rgb(255, 213, 0);
     text-align: center;
-    margin: 0.4em;
+    margin: 0.5em;
+    align-content: space-evenly;
 }
 
-/* ! size change not recommended (border reduced to 0px) */
 .questionCard:hover {
     color: darkred;
     border-color:black;
@@ -251,10 +254,12 @@
 .answerSection {
     display: flex;
     flex-direction: row;
-    grid-row: 8;
-    grid-column: 3 / span 2;
+    grid-row: 9;
+    grid-column: 2 / span 4;
     align-items: center;
     justify-content: space-around;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
 }
 
 /* h3 for instruction to user where to answer */
@@ -268,7 +273,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    grid-row: 9;
+    grid-row: 10;
     grid-column: 3 / span 2;
 }
 
@@ -289,12 +294,11 @@
     color: white;
 }
 
-/* applies to footers other than the one on the index */
-/* ! should be centered */
+/* applies to footers other than the one on the index page */
 footer {
     display: grid;
     grid-column: 1 / span 6;
-    grid-row: 10;
+    grid-row: 11;
     align-content: space-evenly;
     text-align: center;
     color: white;
@@ -303,12 +307,12 @@ footer {
 
 /* all final round stuff down here */
 
-/* finalCat: <section> class name */
+/* finalCat: <section> id name */
 #finalCat {
     color:white;
     display: grid;
     grid-column: 1 / span 6;
-    grid-row: 2 / span 2;
+    grid-row: 3 / span 2;
     text-align: center;
     background-color: blue;
     border: 2px;
@@ -323,12 +327,12 @@ footer {
     text-underline-offset: 0.4vh;
 }
 
-/* finalQues: <section> class name */
+/* finalQues: <section> id name */
 #finalQues {
     color:white;
     display: grid;
     grid-column: 1 / span 6;
-    grid-row: 4 / span 3;
+    grid-row: 5 / span 3;
     text-align: center;
     background-color: blue;
     border: 2px;
@@ -336,40 +340,44 @@ footer {
     border-color: rgb(255, 213, 0);
     margin-left: 5vw;
     margin-right: 5vw;
-    margin-bottom: 5vh;
     align-items: center;
     padding-left: 1vw;
     padding-right: 1vw;
 }
 
-/* pointsAtStake: <section> class name */
+/* pointsAtStake: <section> id name */
 #pointsAtStake {
     color:white;
-    grid-column: 2 / span 4;
-    grid-row: 7;
-    display: flex;
-    align-items: center;
-    margin-top: 5vh;
-    justify-content: space-evenly;
-}
-
-/* finalAnswer: <section> class name */
-#finalAnswer {
-    color: darkred;
     grid-column: 2 / span 4;
     grid-row: 8;
     display: flex;
     align-items: center;
+    margin-top: 2vh;
     justify-content: space-evenly;
-    margin-bottom: 2.5vh;
 }
 
-/* submit: <section> class name */
-#submit {
-    grid-column: 3 / span 2;
+/* finalAnswer: <section> id name */
+#finalAnswer {
+    color: darkred;
+    grid-column: 2 / span 4;
     grid-row: 9;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 2.5vh;
+    margin-top: 1vh;
+}
+
+/* submit: <section> id name */
+#submit {
+    color: white;
+    grid-column: 3 / span 2;
+    grid-row: 10;
+    display: flex;
     margin-right: auto;
     margin-left: auto;
+    font-weight: bold;
+    font-size: medium;
     display: none;
-    /* hidden for now! */
+    /*!  hidden for now! Don't forget me! */
 }
