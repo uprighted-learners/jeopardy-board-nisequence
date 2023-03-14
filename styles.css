@@ -1,17 +1,19 @@
+/* 
+! STAFF COMMENTS
+Functionality:
+Footer text isn't centered.
+Some hover elements obstruct other elements, not "wrong" exactly, but not the best UI design long-term.
+Need to be more vw/vh based
+*/
+
+/** INDEX (HOME) CSS */
+
 #landingBody {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: black;
     display: grid;
     grid-template-columns: 25vw 50vw 25vw;
     grid-template-rows: 5vh 10vh 60vh 5vh 15vh 5vh;
-}
-
-.roundBody {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: black;
-    display: grid;
-    grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
-    grid-template-rows: 15vh 11vh 12vh 12vh 12vh 12vh 12vh 4vh 4vh 4vh;
 }
 
 #welcomeHeader {
@@ -25,225 +27,22 @@
     color:white;
 }
 
-.roundHeader {
-    display: grid;
-    grid-column: 3 / span 2;
-    grid-row: 1 / span 1;
-    align-items:center;
-    text-align: center;
-    margin-left:auto;
-    margin-right:auto;
-    color: white;
-}
-
-.roundName {
-    text-decoration: underline;
-    text-underline-offset: 0.4vw;
-}
-
-.points {
-    display: grid;
-    grid-column: 1 / span 6;
-    grid-row: 1;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-.aName {
-    display: grid;
-    grid-column: 1;
-    grid-row: 1;
-    text-align: left;
-    color:red;
-    text-decoration: underline;
-}
-
-.bName {
-    display: grid;
-    grid-column: 6;
-    grid-row: 1;
-    text-align: right;
-    color:rgb(136, 200, 221);
-    text-decoration: underline;
-}
-
-.aPts {
-    display: grid;
-    grid-column: 1;
-    grid-row: 1;
-    text-align: left;
-    color:red;
-    margin-top: 5rem;
-}
-
-.bPts {
-    display: grid;
-    grid-column: 6 / span 1;
-    grid-row: 1;
-    text-align: right;
-    margin-top: 5rem;
-    color:rgb(136, 200, 221);
-}
-
 #jeopardyLogo {
     display: grid;
-    grid-column: 2 / span 1;
+    grid-column: 1 / span 3;
     grid-row: 3 / span 1;
-    align-items: center;
-    margin-left: auto;
+    align-content:center;
+    margin-left:auto;
     margin-right:auto;
 }
 
+/* 
 #jeopardyLogo:hover {
     image-orientation: flip;
     transform: rotateY(180deg);
 }
-
-.categories {
-    display: grid;
-    grid-row: 2 / span 1;
-    grid-column: 1 / span 6;
-    align-items: center;
-    color:white;
-    text-decoration: underline;
-    text-underline-offset: 0.5em;
-    align-self: center;
-}
-
-.cat1 {
-    display: grid;
-    grid-row: 2 / span 1;
-    grid-column: 1;
-    margin-left: auto;
-    margin-right:auto;
-    background-color: blue;
-    padding-top:3vh;
-    padding-bottom: 3vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(255, 213, 0);
-}
-
-.cat2 {
-    display: grid;
-    grid-row: 2 / span 1;
-    grid-column: 2;
-    margin-left: auto;
-    margin-right:auto;
-    background-color: blue;
-    padding-top:3vh;
-    padding-bottom: 3vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(255, 213, 0);
-}
-
-.cat3 {
-    display: grid;
-    grid-row: 2 / span 1;
-    grid-column: 3;
-    margin-left: auto;
-    margin-right:auto;
-    background-color: blue;
-    padding-top:3vh;
-    padding-bottom: 3vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(255, 213, 0);
-}
-
-.cat4 {
-    display: grid;
-    grid-row: 2 / span 1;
-    grid-column: 4;
-    margin-left: auto;
-    margin-right:auto;
-    background-color: blue;
-    padding-top:3vh;
-    padding-bottom: 3vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(255, 213, 0);
-}
-
-.cat5 {
-    display: grid;
-    grid-row: 2 / span 1;
-    grid-column: 5;
-    margin-left: auto;
-    margin-right:auto;
-    background-color: blue;
-    padding-top:3vh;
-    padding-bottom: 3vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(255, 213, 0);
-}
-
-.cat6 {
-    display: grid;
-    grid-row: 2 / span 1;
-    grid-column: 6;
-    margin-left: auto;
-    margin-right:auto;
-    background-color: blue;
-    padding-top:3vh;
-    padding-bottom: 3vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(255, 213, 0);
-}
-/* question section here */
-.questions {
-    display: flex;
-    grid-row: 3 / span 5;
-    grid-column: 1 / span 6;
-    color:rgb(255, 213, 0);
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.questionCard {
-    padding-top: 3vh;
-    padding-bottom: 3vh;
-    background-color: blue;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(255, 213, 0);
-    text-align: center;
-    margin: 0.4em;
-}
-
-.questionCard:hover {
-    color: darkred;
-    border: 0px;
-}
-
-.answerSection {
-    display: flex;
-    flex-direction: row;
-    grid-row: 8;
-    grid-column: 3 / span 2;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.answerHere {
-    color:white;
-}
+! test
+*/
 
 #startGame {
     display: grid;
@@ -267,6 +66,204 @@
     border-style: solid;
 }
 
+#landingFooter {
+    display: grid;
+    grid-column: 1 / span 3;
+    grid-row: 6;
+    align-content: space-evenly;
+    text-align: center;
+    color: white;
+    font-size: 1.5vh;
+}
+
+/** ROUND CSS */
+
+.roundBody {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+    grid-template-rows: 15vh 11vh 12vh 12vh 12vh 12vh 12vh 4vh 4vh 4vh;
+}
+
+.roundHeader {
+    display: grid;
+    grid-column: 2 / span 4;
+    grid-row: 1 / span 1;
+    align-items:center;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    color: white;
+}
+
+.roundName {
+    text-decoration: underline;
+    text-underline-offset: 0.4vw;
+}
+
+/* points: <section> class name */
+.points {
+    display: grid;
+    grid-column: 1 / span 6;
+    grid-row: 1;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+/* how to display name of Team A */
+.aName {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+    color:red;
+    text-decoration: underline;
+}
+
+/* how to display name of Team B */
+.bName {
+    display: grid;
+    grid-column: 6;
+    grid-row: 1;
+    text-align: right;
+    color:rgb(136, 200, 221);
+    text-decoration: underline;
+}
+
+/* points for Team A */
+.aPts {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+    color:red;
+    margin-top: 5rem;
+}
+
+/* points for Team B */
+.bPts {
+    display: grid;
+    grid-column: 6 / span 1;
+    grid-row: 1;
+    text-align: right;
+    margin-top: 5rem;
+    color:rgb(136, 200, 221);
+}
+
+/* categories: <section> class name */
+.categories {
+    display: grid;
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 6;
+    align-items: center;
+    color:white;
+    text-decoration: underline;
+    text-underline-offset: 0.5em;
+    align-self: center;
+    font-size: small;
+}
+
+/* class for category headers */
+.catHead {
+    display: grid;
+    grid-row: 2 / span 1;
+    margin-left: auto;
+    margin-right:auto;
+    background-color: blue;
+    padding-top:3vh;
+    padding-bottom: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+}
+
+/* 6 category headers */
+#cat1 {
+    grid-column: 1;
+}
+
+#cat2 {
+    grid-column: 2;
+}
+
+#cat3 {
+    grid-column: 3;
+}
+
+#cat4 {
+    grid-column: 4;
+}
+
+#cat5 {
+    grid-column: 5;
+}
+
+#cat6 {
+    grid-column: 6;
+}
+
+/* questions1: <section> id name for questions from category 1 */
+#questions1 {
+    grid-column: 1 / span 1;
+}
+
+#questions2 {
+    grid-column: 2 / span 1;
+}
+
+#questions3 {
+    grid-column: 3 / span 1;
+}
+
+#questions4 {
+    grid-column: 4 / span 1;
+}
+
+#questions5 {
+    grid-column: 5 / span 1;
+}
+
+#questions6 {
+    grid-column: 6 / span 1;
+}
+
+.questionCard {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    background-color: blue;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+    color: rgb(255, 213, 0);
+    text-align: center;
+    margin: 0.4em;
+}
+
+/* ! size change not recommended (border reduced to 0px) */
+.questionCard:hover {
+    color: darkred;
+    border-color:black;
+}
+
+/* answerSection: <section> class name */
+.answerSection {
+    display: flex;
+    flex-direction: row;
+    grid-row: 8;
+    grid-column: 3 / span 2;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* h3 for instruction to user where to answer */
+.answerHere {
+    color:white;
+}
+
+/* buttonSection: <section> class name */
 .buttonSection {
     display: flex;
     flex-direction: row;
@@ -276,6 +273,7 @@
     grid-column: 3 / span 2;
 }
 
+/* button for moving between rounds */
 .lilButton {
     color: rgb(255, 213, 0);
     background-color: darkred;
@@ -283,35 +281,30 @@
     padding-bottom: 0.01rem;
     margin-top: 0.75vh;
     margin-bottom: 0.75vh;
-    margin-left: 0.1em;
-    margin-right: 0.1em;
+    margin-left: 0.4vw;
+    margin-right: 0.4vw;
     text-decoration: none;
 }
 
 .lilButton:hover {
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    margin-left: 1em;
-    margin-right: 1em;
-}
-
-#landingFooter {
-    display: grid;
-    grid-column: 1 / span 3;
-    grid-row: 6;
     color: white;
 }
 
+/* applies to footers other than the one on the index */
+/* ! should be centered */
 footer {
     display: grid;
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 6;
     grid-row: 10;
+    align-content: space-evenly;
+    text-align: center;
     color: white;
-    align-items: center;
+    font-size: 1.5vh;
 }
 
 /* all final round stuff down here */
 
+/* finalCat: <section> class name */
 #finalCat {
     color:white;
     display: grid;
@@ -331,6 +324,7 @@ footer {
     text-underline-offset: 0.4vh;
 }
 
+/* finalQues: <section> class name */
 #finalQues {
     color:white;
     display: grid;
@@ -349,6 +343,7 @@ footer {
     padding-right: 1vw;
 }
 
+/* pointsAtStake: <section> class name */
 #pointsAtStake {
     color:white;
     grid-column: 2 / span 4;
@@ -359,6 +354,7 @@ footer {
     justify-content: space-evenly;
 }
 
+/* finalAnswer: <section> class name */
 #finalAnswer {
     color: darkred;
     grid-column: 2 / span 4;
@@ -369,6 +365,7 @@ footer {
     margin-bottom: 2.5vh;
 }
 
+/* submit: <section> class name */
 #submit {
     grid-column: 3 / span 2;
     grid-row: 9;

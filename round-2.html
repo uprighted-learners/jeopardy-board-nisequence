@@ -9,70 +9,93 @@
     <script src="./scripts/index.js" type="module"></script>
   </head>
   <body class="roundBody">
+    <!-- separate class for roundBody so that flex display is not disturbed by css changes to index -->
     <header class="roundHeader">
-      <h1 class="roundName">Jeopardy: Round Two</h1><br>
-      <h2>>>> Team B <<<</h2>
+      <!-- Display round name -->
+      <h1 class="roundName">Jeopardy: Round Two</h1>
+      <!-- Display which team is up for question selection -->
+      <h3>>>> Team B <<<</h3>
     </header>
     <section class="points">
+      <!-- section for team names & points -->
       <h3 class="aName">Team A</h3>
       <h3 class="bName">Team B</h3>
       <h2 class="aPts">0 PTS</h2>
       <h2 class="bPts">0 PTS</h2>
     </section>
     <section class="categories">
-      <h1 class="cat1">Category 1</h1>
-      <h1 class="cat2">Category 2</h1>
-      <h1 class="cat3">Category 3</h1>
-      <h1 class="cat4">Category 4</h1>
-      <h1 class="cat5">Category 5</h1>
-      <h1 class="cat6">Category 6</h1>
+      <!-- section for category headers -->
+      <h2 class="catHead" id="cat1">Category 1</h2>
+      <h2 class="catHead" id="cat2">Category 2</h2>
+      <h2 class="catHead" id="cat3">Category 3</h2>
+      <h2 class="catHead" id="cat4">Category 4</h2>
+      <h2 class="catHead" id="cat5">Category 5</h2>
+      <h2 class="catHead" id="cat6">Category 6</h2>
     </section>
-    <section class="questions">
-      <!-- question boxes here! -->
-      <h1 class="questionCard">400</h1>
-      <h1 class="questionCard">800</h1>
-      <h1 class="questionCard">1200</h1>
-      <h1 class="questionCard">1600</h1>
-      <h1 class="questionCard">2000</h1>
-      <h1 class="questionCard">400</h1>
-      <h1 class="questionCard">800</h1>
-      <h1 class="questionCard">1200</h1>
-      <h1 class="questionCard">1600</h1>
-      <h1 class="questionCard">2000</h1>
-      <h1 class="questionCard">400</h1>
-      <h1 class="questionCard">800</h1>
-      <h1 class="questionCard">1200</h1>
-      <h1 class="questionCard">1600</h1>
-      <h1 class="questionCard">2000</h1>
-      <h1 class="questionCard">400</h1>
-      <h1 class="questionCard">800</h1>
-      <h1 class="questionCard">1200</h1>
-      <h1 class="questionCard">1600</h1>
-      <h1 class="questionCard">2000</h1>
-      <h1 class="questionCard">400</h1>
-      <h1 class="questionCard">800</h1>
-      <h1 class="questionCard">1200</h1>
-      <h1 class="questionCard">1600</h1>
-      <h1 class="questionCard">2000</h1>
-      <h1 class="questionCard">400</h1>
-      <h1 class="questionCard">800</h1>
-      <h1 class="questionCard">1200</h1>
-      <h1 class="questionCard">1600</h1>
-      <h1 class="questionCard">2000</h1>
+    <section class="questions1">
+      <!-- 1st cat questions -->
+      <h3 class="questionCard">200</h3>
+      <h3 class="questionCard">400</h3>
+      <h3 class="questionCard">600</h3>
+      <h3 class="questionCard">800</h3>
+      <h3 class="questionCard">1000</h3>
+    </section>
+    <section class="questions2">
+      <!-- 2nd cat questions -->
+      <h3 class="questionCard">200</h3>
+      <h3 class="questionCard">400</h3>
+      <h3 class="questionCard">600</h3>
+      <h3 class="questionCard">800</h3>
+      <h3 class="questionCard">1000</h3>
+    </section>
+    <section class="questions3">      
+      <!-- 3rd cat questions -->
+      <h3 class="questionCard">200</h3>
+      <h3 class="questionCard">400</h3>
+      <h3 class="questionCard">600</h3>
+      <h3 class="questionCard">800</h3>
+      <h3 class="questionCard">1000</h3>
+    </section>
+    <section class="questions4">      
+      <!-- 4th cat questions -->
+      <h3 class="questionCard">200</h3>
+      <h3 class="questionCard">400</h3>
+      <h3 class="questionCard">600</h3>
+      <h3 class="questionCard">800</h3>
+      <h3 class="questionCard">1000</h3>
+    </section>
+    <section class="questions5">  
+      <!-- 5th cat questions -->    
+      <h3 class="questionCard">200</h3>
+      <h3 class="questionCard">400</h3>
+      <h3 class="questionCard">600</h3>
+      <h3 class="questionCard">800</h3>
+      <h3 class="questionCard">1000</h3>
+    </section>
+    <section class="questions6">      
+      <!-- 6th cat questions -->
+      <h3 class="questionCard">200</h3>
+      <h3 class="questionCard">400</h3>
+      <h3 class="questionCard">600</h3>
+      <h3 class="questionCard">800</h3>
+      <h3 class="questionCard">1000</h3>
     </section>
     <section class="answerSection">
+      <!-- section for user to put in an answer and submit it -->
       <h3 class="answerHere">ANSWER:</h3>
       <input type="text" name="answer" id="answerBox" style="resize:horizontal; width:15vw;">
-      <input type="submit" class=guessButton value="GUESS" style="resize:vertical; height:3vh; width:10vw;">
+      <input type="submit" class="lilButton" value="GUESS" style="resize:vertical; height:3vh; width:10vw; font-weight: bold;">
     </section>
     <section class="buttonSection">
-      <a href="final-jeopardy.html" class="lilButton"><h3 class="lilButton" id="pass1">PASS</h3></a>
-      <a href="final-jeopardy.html" class="lilButton"><h3 class="lilButton" id="next1">NEXT >></h3></a>
+      <!-- options for user to pass the turn or move to the next round -->
+      <a href="final-jeopardy.html" class="lilButton"><p class="lilButton" id="pass2"><b>PASS</b></p></a>
+      <a href="final-jeopardy.html" class="lilButton"><p class="lilButton" id="next2"><b>NEXT >>></b></p></a>
     </section>
-    <!-- Do not change the script source. Allows import/export to work. -->
-    <script src="./scripts/index.js" type="module"></script>
+    <!-- footer -->
     <footer>
       Coded by GitHub user nisequence, aka Nicole ~ Enjoy!
     </footer>
+    <!-- Do not change the script source. Allows import/export to work. -->
+    <script src="./scripts/index.js" type="module"></script>
   </body>
 </html>
