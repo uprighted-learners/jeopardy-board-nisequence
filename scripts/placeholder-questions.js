@@ -326,4 +326,5 @@ const placeholderQuestions = [
   },
 ];
 
+// This exports the file contents so it can be imported into another file.
 export default placeholderQuestions;
