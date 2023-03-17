@@ -250,6 +250,51 @@
     border-color:black;
 }
 
+.hide {
+    display: grid;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    background-color:rgb(0, 25, 114);
+    border: 2px;
+    border-style: solid;
+    border-color: dark yellow;
+    color: gray;
+    text-align: center;
+    margin: 0.5em;
+    align-content: space-evenly;
+}
+
+#hideIt {
+    display: none;
+}
+
+.superSecret {
+    position: fixed;
+    width: 100vw;
+    height: 75vh;
+}
+
+#invis {
+    display:none;
+}
+
+.questionSelected {
+    display: grid;
+    align-content: center;
+    z-index: -1000;
+    text-align: center;
+    background-color: darkblue;
+    width: 75vw;
+    height: 45vh;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 0);
+    color:white;
+    margin: auto;
+    margin-top: 30vh;
+    padding: 2vw;
+}
+
 /* answerSection: <section> class name */
 .answerSection {
     display: flex;

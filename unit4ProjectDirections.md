@@ -12,7 +12,7 @@ Given the players are on the landing page
 
 When one player clicks the 'Start Game' button
 
-Then the players redirected to the Round 1 page
+Then the players are redirected to the Round 1 page
 ~~~
 
 ## Start the Game

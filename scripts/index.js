@@ -5,48 +5,98 @@ import placeholderQuestions from "./placeholder-questions.js";
 // Is an object whose contents are the file's data
 console.log({ placeholderQuestions });
 // -------------------------------------------------------------------
-console.log(placeholderQuestions[0]);
+//console.log(placeholderQuestions[0]); //test
 //! When I need a question/answer, I can iterate over the array.
 // ------------------------------
 // *Global Variables
 
+// Category Headers
 let cat1 = document.getElementById("cat1");
-console.log(cat1);
 let cat2 = document.getElementById("cat2");
-console.log(cat2);
 let cat3 = document.getElementById("cat3");
-console.log(cat3);
 let cat4 = document.getElementById("cat4");
-console.log(cat4);
 let cat5 = document.getElementById("cat5");
-console.log(cat5);
 let cat6 = document.getElementById("cat6");
-console.log(cat6);
-let aPts = document.getElementsByClassName("aPts");
-console.log(aPts);
-let bPts = document.getElementsByClassName("bPts");
-console.log(bPts);
+
+let catArray = [cat1, cat2, cat3, cat4, cat5, cat6]; // Group Headers
+let catIteration = 0; // iteration to go thru catArray
+let rightCat = 0; // iteration to skip thru json file by category
+
+/* 
+!NOT CURRENTLY USING
+let qArrayIteration = 0; // iteration to go thru qArray
+let qCardIteration = 0; // iteration to go through cat1Qs, etc.
+let rightQ = 0; // iteration to skip thru questions from json file
+*/
+
+let questionSelected = document.getElementsByClassName("questionSelected");
+console.log(questionSelected); //!testing
+let selectionSection = document.getElementsByClassName("superSecret");
+
+let aPts = document.getElementsByClassName("aPts")[0];
+//console.log(aPts);
+let bPts = document.getElementsByClassName("bPts")[0];
+//console.log(bPts);
+let aPtsVar = 0;
+let bPtsVar = 0;
+let teamUp = document.getElementById("teamUp");
+console.log(teamUp);
 
 let next1 = document.getElementById("next1");
-console.log(next1);
 let pass1 = document.getElementById("pass1");
-console.log(pass1);
 let guess1 = document.getElementById("guess1");
-console.log(guess1);
 let ansInput = document.getElementById("answerBox");
 console.log(ansInput);
 
-/* * q boxes by section as array
-let cat1Qs = document.getElementsByClass (?); // convert to array
-let cat2Qs = document.getElementsByClass (?); // convert to array
-let cat3Qs = document.getElementsByClass (?); // convert to array
-let cat4Qs = document.getElementsByClass (?); // convert to array
-let cat5Qs = document.getElementsByClass (?); // convert to array
-let cat6Qs = document.getElementsByClass (?); // convert to array
-*/
+let parentCat;
+let pointValue;
+let cQuestionTest;
+let cQuestion;
+let startCategory;
+
+let qCardCollection = document.getElementsByClassName("questionCard");
+let newQCardArray = Array.from(qCardCollection);
+console.log(newQCardArray);
+for (let i = 0; i < newQCardArray.length; i++) {
+    newQCardArray[i].onclick = () => {
+        parentCat = newQCardArray[i].parentNode.id; // e.g. "questions1"
+        //console.log(parentCat);
+        pointValue = newQCardArray[i].innerText; // e.g. "200"
+        cQuestionTest = `We need a question for ${parentCat} that would give the user ${pointValue} if answered correctly.`;
+        //! console.log(cQuestionTest); test
+        if (parentCat == "questions1") {
+            console.log("This is from cat1");
+            startCategory = 0;
+            findQuestion(startCategory, pointValue);
+        } else if (parentCat == "questions2") {
+            console.log("This is from cat2");
+            startCategory = 10;
+            findQuestion(startCategory, pointValue);
+        } else if (parentCat == "questions3") {
+            console.log("this is from cat3");
+            startCategory = 20;
+            findQuestion(startCategory, pointValue);
+        } else if (parentCat == "questions4") {
+            console.log("this is from cat4");
+            startCategory = 30;
+            findQuestion(startCategory, pointValue);
+        } else if (parentCat == "questions5") {
+            console.log("this is from cat5");
+            startCategory = 40;
+            findQuestion(startCategory, pointValue);
+        } else if (parentCat == "questions6") {
+            console.log("this is from cat6");
+            startCategory = 50;
+            findQuestion(startCategory, pointValue);
+        } else {
+            console.error("something went wrong....");
+        }
+        newQCardArray[i].className = "hide";
+    }
+}
 
 /* * each q box w/ id
-let cat1q200 = document.getElement;
+let cat1q200 = document.getElements
 let cat1q400 = document.getElement;
 let cat1q600 = document.getElement;
 let cat1q800 = document.getElement;
@@ -77,45 +127,97 @@ let cat6q600 = document.getElement;
 let cat6q800 = document.getElement;
 let cat6q1000 = document.getElement;
 */
+let qSource = "scripts/questions.json";
+async function fetchCategories() {
+    fetch(qSource)
+        .then (result => result.json()) // no ;
+        .then (data => {
+            let questionsArray = data.placeholderQuestions;
+            //console.log(questionsArray); //! test
+            while (catIteration < 6) {
+                //console.log(questionsArray[rightCat].category);
+                catArray[catIteration].textContent = questionsArray[rightCat].category;
+                catIteration++;
+                rightCat = rightCat + 10;
+            }
+        }) // no ;
+        .catch((err) => console.error(err));
+}
 
+async function findQuestion(cat, points) {
+    console.log(`You selected a question from the category beginning at array # ${cat} worth ${points} points.`);
+    let howToFind = (points / 100) - 2;
+    try {
+        // console.log(howToFind); // works
+        let res = await fetch(qSource);
+        let results = await res.json();
+        let data = results.placeholderQuestions[howToFind];
+        console.log(data);
+        selectionSection[0].id = "";
+        questionSelected[0].id = "";
+        questionSelected[0].innerText = data.question;
+        enablePass();
+        guess1.onclick = () => {
+            console.log(ansInput.value);
+            console.log(data.answer);
+            console.log(questionSelected);
+            console.log(selectionSection);
+            if (ansInput.value == data.answer) {
+                console.log("Yay! You got it!");
+                addPoints(points);
+                questionSelected.id = "invis";
+                selectionSection.id = "hideIt";
+                //! not hiding
+            } else if (ansInput.value == "") {
+                let noInputError = "User did not input anything.";
+                console.log(noInputError);
+            } else { // wrong answer
+                console.log("Nice try...");
+                questionSelected.id = "invis";
+                selectionSection.id = "hideIt";
+                //! not hiding
+            }
+        }
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+async function enablePass() {
+    pass1.onclick = () => {
+        teamUp.textContent = ">>> Team B <<<";
+        
+        //! maybe do more fancy stuff later if time
+    }
+}
+
+async function addPoints(pointAmount) {
+    console.log(pointAmount);
+    let pointDigit = pointAmount.parseInt();
+    console.log(`This is the digit ${pointDigit}`);
+    if (teamUp.textContent == ">>> Team A <<<") {
+        aPtsVar = aPtsVar + pointDigit;
+        aPts.textContent = aPtsVar + " PTS";
+    } else if (teamUp.textContent == ">>> Team B <<<") {
+        bPtsVar = bPtsVar + pointAmount;
+        bPts.textContent = bPtsVar + " PTS";
+    } else {
+        console.error("I don't know what team that is!");
+    }
+}
 // --------------------
+// on page load --->
+fetchCategories();
+//! fetchQuestions();
+guess1.addEventListener('click', () => {
+    console.log("You guessed!");
+})
+//! testing points
+//addPoints(200);
 
 /*
-on page load --->
-    print categories
-
-on next click --->
-    does not work if guess has not been selected
-
-on questionBox click --->
-    load question that pertains to said category (find tool? fetch?)
-    maximize question box to majority of screen
-    display: fixed
-*/
-// ? on guess click --->
-    // disable auto refresh of form
-    // hide maximized box
-    //analyze response (ansInput.value) as correct or incorrect
-    console.log(ansInput.value);
-    if (ansInput.value = correct) {
-        //pointValue = (read point value on front side of card);
-        console.log(pointValue);
-        teamAPoints = pointValue;
-        console.log(teamAPoints);
-        aPts.textContent = teamAPoints;
-        // make all buttons invalid (except next)
-        // next redirects to URL with point value & used question value
-    } else if (ansInput.value = " ") {
-        let noInputError = "User did not input anything.";
-        console.log(noInputError);
-        // let errorBox = document.createElement();
-        // let errorBox.textContent = noInputError;
-    } else { // (ansInput.value = incorrect)
-        //make all buttons invalid (except next)
-        //next redirects to URL with point value (0) & used question value
-    };
-
-/* ? NEXT PAGE --->
+? NEXT PAGE --->
+1st of all... next redirects to URL with point value (0) & used question value
 let aUrlPts = glean from URL;
 console.log(aUrlPts);
 let aPts.textContent = aUrlPts;
