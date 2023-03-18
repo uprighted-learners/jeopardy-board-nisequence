@@ -6,7 +6,7 @@ import placeholderQuestions from "./placeholder-questions.js";
 console.log({ placeholderQuestions });
 // -------------------------------------------------------------------
 //console.log(placeholderQuestions[0]); //test
-//! When I need a question/answer, I can iterate over the array.
+// When I need a question/answer, I can iterate over the array.
 // ------------------------------
 // *Global Variables
 
@@ -22,15 +22,7 @@ let catArray = [cat1, cat2, cat3, cat4, cat5, cat6]; // Group Headers
 let catIteration = 0; // iteration to go thru catArray
 let rightCat = 0; // iteration to skip thru json file by category
 
-/* 
-!NOT CURRENTLY USING
-let qArrayIteration = 0; // iteration to go thru qArray
-let qCardIteration = 0; // iteration to go through cat1Qs, etc.
-let rightQ = 0; // iteration to skip thru questions from json file
-*/
-
 let questionSelected = document.getElementsByClassName("questionSelected");
-console.log(questionSelected); //!testing
 let selectionSection = document.getElementsByClassName("superSecret");
 
 let aPts = document.getElementsByClassName("aPts")[0];
@@ -43,6 +35,7 @@ let teamUp = document.getElementById("teamUp");
 console.log(teamUp);
 
 let next1 = document.getElementById("next1");
+//! needs to be enabled when A or B reaches 15,000 points or when all questions are selected
 let pass1 = document.getElementById("pass1");
 let guess1 = document.getElementById("guess1");
 let ansInput = document.getElementById("answerBox");
@@ -153,7 +146,8 @@ async function findQuestion(cat, points) {
         let results = await res.json();
         let data = results.placeholderQuestions[howToFind];
         console.log(data);
-        selectionSection[0].id = "";
+        selectionSection[0].id = ""; // this will make it impossible for user to select new question
+        //! add onclick event for selectionSection that tells user to answer or pass
         questionSelected[0].id = "";
         questionSelected[0].innerText = data.question;
         enablePass();
@@ -165,17 +159,17 @@ async function findQuestion(cat, points) {
             if (ansInput.value == data.answer) {
                 console.log("Yay! You got it!");
                 addPoints(points);
-                questionSelected.id = "invis";
-                selectionSection.id = "hideIt";
-                //! not hiding
+                questionSelected[0].id = "invis";
+                selectionSection[0].id = "hideIt";
             } else if (ansInput.value == "") {
                 let noInputError = "User did not input anything.";
                 console.log(noInputError);
             } else { // wrong answer
                 console.log("Nice try...");
-                questionSelected.id = "invis";
-                selectionSection.id = "hideIt";
-                //! not hiding
+                subtractPoints(points);
+                teamUp.textContent = ">>> Team B <<<"; //! need to make this & Team A variables and iterate to/from - only 1 chance per team
+
+                //! maybe do more fancy stuff later if time
             }
         }
     } catch(err) {
@@ -186,40 +180,63 @@ async function findQuestion(cat, points) {
 async function enablePass() {
     pass1.onclick = () => {
         teamUp.textContent = ">>> Team B <<<";
+        //! need to make this & Team A variables and iterate to/from - only 1 chance to pass
         
         //! maybe do more fancy stuff later if time
     }
 }
 
 async function addPoints(pointAmount) {
-    console.log(pointAmount);
-    let pointDigit = pointAmount.parseInt();
-    console.log(`This is the digit ${pointDigit}`);
+    let pointDigit = parseInt(pointAmount);
     if (teamUp.textContent == ">>> Team A <<<") {
-        aPtsVar = aPtsVar + pointDigit;
-        aPts.textContent = aPtsVar + " PTS";
+        aPtsVar = parseInt(aPtsVar + pointDigit);
+        aPts.innerText = aPtsVar + " PTS";
+        guess1.onclick = () => { //! need to move this so that guess1 button works for Team B
+            console.log("Do nothing");
+        }
     } else if (teamUp.textContent == ">>> Team B <<<") {
-        bPtsVar = bPtsVar + pointAmount;
-        bPts.textContent = bPtsVar + " PTS";
+        bPtsVar = parseInt(bPtsVar + pointDigit);
+        bPts.innerText = bPtsVar + " PTS";
+        guess1.onclick = () => { //! need to move this so that guess1 button works for Team B
+            console.log("Do nothing");
+        }
     } else {
         console.error("I don't know what team that is!");
     }
 }
+
+async function subtractPoints(pointAmount) {
+    let pointDigit = parseInt(pointAmount);
+    if (teamUp.textContent == ">>> Team A <<<") {
+        aPtsVar = parseInt(aPtsVar - pointDigit);
+        aPts.innerText = aPtsVar + " PTS";
+        guess1.onclick = () => {
+            console.log("Do nothing");
+        }
+    } else if (teamUp.textContent == ">>> Team B <<<") {
+        bPtsVar = parseInt(bPtsVar - pointDigit);
+        bPts.innerText = bPtsVar + " PTS";
+        guess1.onclick = () => {
+            console.log("Do nothing");
+        }
+    } else {
+        console.error("I don't know what team that is!");
+    }
+}
+
+async function notGuessed() { //! need to call this after both teams get it wrong
+    questionSelected[0].id = "invis";
+    selectionSection[0].id = "hideIt";
+}
 // --------------------
 // on page load --->
 fetchCategories();
-//! fetchQuestions();
-guess1.addEventListener('click', () => {
-    console.log("You guessed!");
-})
-//! testing points
-//addPoints(200);
 
 /*
 ? NEXT PAGE --->
-1st of all... next redirects to URL with point value (0) & used question value
+This page comes when either a or b has 15,000 points OR all questions are cleared
+1st of all... next redirects to URL with point value (0)
 let aUrlPts = glean from URL;
-console.log(aUrlPts);
 let aPts.textContent = aUrlPts;
 console.log(aPts.textContent);
 let usedQues = glean from URL;
