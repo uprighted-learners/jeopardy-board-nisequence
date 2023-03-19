@@ -29,6 +29,7 @@ let teamUp = document.getElementById("teamUp");
 console.log(teamUp);
 let teamArray = [">>> Team A <<<", ">>> Team B <<<"];
 let tagTeam = 0;
+let attempts = 0; //! need to use this to fix Team B advantage (Team A will never get a chance if they go 1st)
 
 let aPts = document.getElementsByClassName("aPts")[0];
 //console.log(aPts);
@@ -101,7 +102,7 @@ async function fetchCategories() {
 
 async function findQuestion(cat, points) {
     console.log(`You selected a question from the category beginning at array # ${cat} worth ${points} points.`);
-    let howToFind = (points / 100) - 2;
+    let howToFind = cat + ((points / 100) - 2);
     try {
         // console.log(howToFind); // works
         let res = await fetch(qSource);
@@ -118,7 +119,7 @@ async function findQuestion(cat, points) {
             console.log(data.answer); //! testing
             if (ansInput.value == data.answer) {
                 console.log("Yay! You got it!");
-                addPoints(points);
+                addPoints(points); // give the correct team points
                 hideTheQuestion();
                 endGuessing();
             } else if (ansInput.value == "") {
@@ -126,19 +127,17 @@ async function findQuestion(cat, points) {
                 console.log(noInputError); //! send alert to users instead
             } else { // wrong answer
                 console.log("Nice try...");
-                subtractPoints(points);
-                tagTeam++;
-                console.log(tagTeam);
-                if (tagTeam > 1) {
-                    tagTeam = tagTeam - 2; // reset
-                    teamUp.textContent = teamArray[tagTeam];
-                    //! maybe do more fancy stuff later if time
+                subtractPoints(points); // subtract points from the correct team
+                tagTeam++; // advance to next team's turn
+                attempts++; // note that an attempt has been made on this question
+                if (tagTeam > 1) { // if at end of teamArray
+                    tagTeam = tagTeam - 2; // reset teamArray starting point
+                }
+                teamUp.textContent = teamArray[tagTeam]; // switch teams
+                //! maybe do more fancy stuff later if time
+                if (attempts > 1) { // if 2 or more attempts have been made on this question
                     hideTheQuestion();
                     endGuessing();
-                } else {
-                    console.log(teamArray[tagTeam]);
-                    teamUp.textContent = teamArray[tagTeam];
-                    //! maybe do more fancy stuff later if time
                 }
             }
         }
@@ -149,18 +148,16 @@ async function findQuestion(cat, points) {
 
 async function enablePass() {
     pass1.onclick = () => {
-        tagTeam++;
-        console.log(tagTeam);
-        if (tagTeam > 1) {
-            tagTeam = tagTeam - 2; // reset
-            teamUp.textContent = teamArray[tagTeam];
-            //! maybe do more fancy stuff later if time
+        tagTeam++; // advance to the next team's turn
+        attempts++; // Team who passes does not get to guess afterward even if 2nd team guesses wrong
+        if (tagTeam > 1) { // if at end of teamArray
+            tagTeam = tagTeam - 2; // reset teamArray starting point
+        }
+        teamUp.textContent = teamArray[tagTeam]; // switch teams
+        //! maybe do more fancy stuff later if time
+        if (attempts > 1) { // if 2 or more attempts have been made on this question
             hideTheQuestion();
             endGuessing();
-        } else {
-            console.log(teamArray[tagTeam]);
-            teamUp.textContent = teamArray[tagTeam];
-            //! maybe do more fancy stuff later if time
         }
         //  only 1 chance to pass
         pass1.onclick = () => {
@@ -198,6 +195,7 @@ async function subtractPoints(pointAmount) {
 async function hideTheQuestion() { // call this after both teams get it wrong and/or pass
     questionSelected[0].id = "invis";
     selectionSection[0].id = "hideIt";
+    attempts = 0; // reset attempts to 0 as this question has been discarded
 }
 
 async function endGuessing() {
