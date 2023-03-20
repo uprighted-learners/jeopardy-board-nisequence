@@ -69,17 +69,17 @@
     display: grid;
     grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
     /* columns are evenly distributed */
-    grid-template-rows: 8vh 6vh 17vh 10.5vh 10.5vh 10.5vh 10.5vh 10.5vh 6vh 4vh 4vh;
+    grid-template-rows: 8vh 4vh 13vh 10.75vh 10.75vh 10.75vh 10.75vh 10.75vh 6vh 4vh 4vh;
     /* rows are very specifically defined to fit their elements based on viewport */
     /* ! not quite mobile friendly (maybe someday) */
 }
 
 /* roundHeader: <section> that contains Jeopardy Round Name & which Team is up */
 .roundHeader {
-    display: grid;
+    display:grid;
     grid-column: 2 / span 4;
     grid-row: 1 / span 2;
-    align-items:center;
+    align-content: center;
     text-align: center;
     margin-left:auto;
     margin-right:auto;
@@ -89,15 +89,15 @@
 .roundName {
     grid-row: 1 / span 1;
     text-decoration: underline;
-    text-underline-offset: 0.4vw;
+    text-underline-offset: 0.3vw;
+    margin-bottom: 0.25vh;
 }
 
 #teamUp {
-    display: grid;
     grid-row: 2 / span 1;
     font-weight: bold;
-    font-size: x-large;
-    margin-top: 0px;
+    font-size: larger;
+    margin-top: 0.25vh;
     margin-bottom: 2vh;
     color: white;
 }
@@ -130,6 +130,7 @@
     text-align: left;
     color:red;
     text-decoration: underline;
+    margin-top: 1vh;
 }
 
 /* how to display name of Team B */
@@ -140,6 +141,7 @@
     text-align: right;
     color:rgb(136, 200, 221);
     text-decoration: underline;
+    margin-top: 1vh;
 }
 
 /* points for Team A */
@@ -149,6 +151,7 @@
     grid-row: 2;
     text-align: left;
     color:red;
+    margin-top: 0.25vh;
 }
 
 /* points for Team B */
@@ -158,6 +161,7 @@
     grid-row: 2;
     text-align: right;
     color:rgb(136, 200, 221);
+    margin-top: 0.25vh;
 }
 
 /* categories: <section> class name */
@@ -170,6 +174,7 @@
     align-self: center;
     font-size: small;
     font-weight: bold;
+    align-content: space-evenly;
 }
 
 /* class for category headers */
@@ -177,19 +182,18 @@
     text-decoration: underline;
     display:grid;
     text-align: center;
-    align-content: space-evenly;
     background-color: blue;
     margin-top: 0.01vh;
     margin-bottom: 0.01vh;
-    margin-left: 0.4rem;
-    margin-right: 0.4rem;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
     border: 2px;
     border-style: solid;
     border-color: rgb(255, 213, 0);
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    padding-left: 1.75vw;
-    padding-right: 1.75vw;
+    padding-top: 3.5vh;
+    padding-bottom: 3.5vh;
+    align-items: center;
+    justify-items: center;
 }
 
 /* 6 category headers in separate columns */
@@ -284,7 +288,7 @@
 .superSecret {
     position: fixed;
     width: 100vw;
-    height: 75vh;
+    height: 80vh;
 }
 
 #invis {
