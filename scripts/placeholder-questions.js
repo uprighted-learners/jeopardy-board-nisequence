@@ -280,7 +280,7 @@ const placeholderQuestions = [
   },
   {
     category: "General",
-    question: "What is the French word for &quot;hat&quot;?",
+    question: "What is the French word for 'hat'?",
     answer: "Chapeau",
   },
   {

@@ -35,7 +35,7 @@ let pass1 = document.getElementById("pass1");
 let ansInput = document.getElementById("answerBox");
 let guess1 = document.getElementById("guess1");
 let next1 = document.getElementById("next1");
-let roundTwo = "./round-2.html"; //! need to use
+let roundTwo = "./round-2.html?aPoints="; //! need to test
 
 // ? Other Global Variables
 
@@ -94,7 +94,6 @@ async function findQuestion(cat, points) {
         questionSelected[0].innerText = data.question; // insert the question onto the card
         enablePass(); // give the team opportunity to use the pass button
         guess1.onclick = () => { // when the user clicks the guess button
-            ansInput.value = ""; //! test this
             if (ansInput.value == data.answer) { // correct
                 addPoints(points); // give the correct team points
                 hideTheQuestion();
@@ -119,6 +118,7 @@ async function findQuestion(cat, points) {
                     // now we are ready for a new question to be selected
                 }
             }
+            ansInput.value = ""; //! test this
         }
     } catch(err) {
         console.error(err);
@@ -194,10 +194,10 @@ async function checkIfLimitReached() {
     if (aPtsVar >= 15000 || bPtsVar >= 15000 || runningTotal == 0) { // if either team has at least 15000 or if all questions are used
         selectionSection[0].id = ""; // disable selection of more questions
         questionSelected[0].id = ""; // reusing this for an alert because I'm short on time
-        questionSelected[0].innerText = "All questions have been answered or 15000 points have been obtained byS at least one team.\nPlease move to the next round.";
+        questionSelected[0].innerText = "All questions have been answered or 15000 points have been obtained by at least one team.\n\nPlease move to the next round.";
         next1.onclick = () => {
             console.log(`I need to send the users to a URL to page two with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
-            document.location = roundTwo + aPtsVar + bPtsVar;
+            document.location = roundTwo + aPtsVar + "&bPoints=" + bPtsVar;
             //! don't forget to test this
         }
     }

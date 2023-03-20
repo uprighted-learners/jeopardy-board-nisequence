@@ -3,9 +3,9 @@
 // This makes the "placeholderQuestions" act like a variable (essentially).
 import placeholderQuestions from "./placeholder-questions.js";
 // Is an object whose contents are the file's data
-// console.log({ placeholderQuestions });
+console.log({ placeholderQuestions });
 // ------------------------------
-//console.log(placeholderQuestions[0]); //test
+console.log(placeholderQuestions[0]); //!test
 // When I need a question/answer, I can iterate over the array.
 // ------------------------------
 /*
@@ -34,6 +34,7 @@ let cat6 = document.getElementById("cat6");
 
 //* All the Question Cards
 let qCardCollection = document.getElementsByClassName("questionCard");
+console.log(qCardCollection); //!test
 
 //* The temporarily invisible question box & section
 let questionSelected = document.getElementsByClassName("questionSelected");
@@ -44,19 +45,19 @@ let next1 = document.getElementById("next2");
 let pass1 = document.getElementById("pass2");
 let guess1 = document.getElementById("guess2");
 let ansInput = document.getElementById("answerBox");
-let finalLink = "./final-jeopardy.html"; //! need to use
+let finalLink = "./final-jeopardy.html?aPoints="; //! need to test
 
 // ? Other Global Variables
 
 // * Header-Related Variables
-let teamArray = [">>> Team A <<<", ">>> Team B <<<"];
+let teamArray = [">>> Team B <<<", ">>> Team A <<<"];
 let tagTeam = 0; // determines whether to use index 0 or 1 of teamArray
 let attempts = 0; // determines when it is time to move on from a question
-////let aPtsVar = 0; // running total of how many points Team A has
-////let bPtsVar = 0; // running total of how many points Team B has
 let params = new URLSearchParams(document.location.search);
-let aPtsVar = params.get('aPtsVar'); //! need to make sure this works
-let bPtsVar = params.get('bPtsVar'); //! need to make sure this works
+let aPtsVar = parseInt(params.get('aPoints')); //! need to make sure this works
+aPts.innerText = aPtsVar + " PTS";
+let bPtsVar = parseInt(params.get('bPoints')); //! need to make sure this works
+bPts.innerText = bPtsVar + " PTS";
 
 // * Category Fetching Variables
 let catArray = [cat1, cat2, cat3, cat4, cat5, cat6]; // group headers
@@ -69,6 +70,7 @@ let parentCat; // temp variable for the category that each question belongs to
 let pointValue; // temp variable to hold the point value for each question
 let startCategory; // temp variable to find the starting point within the JSON file given the category needed (based on parentCat variable)
 let newQCardArray = Array.from(qCardCollection); // converts question cards into an array
+console.log(newQCardArray); //! test
 let runningTotal = 30; // keep track of all available questions
 
 async function fetchCategories() {
@@ -127,6 +129,7 @@ async function findQuestion(cat, points) {
                     // now we are ready for a new question to be selected
                 }
             }
+            ansInput.value = ""; //! test this
         }
     } catch(err) {
         console.error(err);
@@ -193,13 +196,14 @@ async function endGuessing() {
 }
 
 async function checkIfLimitReached() {
-    if (aPtsVar >= 15000 || bPtsVar >= 15000 || runningTotal == 0) { // if either team has at least 15000 or if all questions are used
+    if (aPtsVar >= 15000 || bPtsVar >= 15000 || runningTotal == 0) { // if either team has at least 15000 or if all questions are used //! update this to 30000 later
         selectionSection[0].id = ""; // disable selection of more questions
         questionSelected[0].id = ""; // reusing this for an alert because I'm short on time
         questionSelected[0].innerText = "All questions have been answered or 15000 points has been reached. Please move to the next round.";
         next1.onclick = () => {
-            console.log(`I need to send the users to a URL to page two with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
-            //! don't forget to actually do this
+            console.log(`I need to send the users to a URL to Final Round with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
+            document.location = finalLink + aPtsVar + "&bPoints=" + bPtsVar;
+            //! don't forget to test this
         }
     }
 }
@@ -211,21 +215,27 @@ for (let i = 0; i < newQCardArray.length; i++) { // make the questions clickable
         parentCat = newQCardArray[i].parentNode.id; // e.g. "questions1"
         pointValue = newQCardArray[i].innerText; // e.g. "200"
         if (parentCat == "questions1") { // if the question card selected belongs to the section called "question1", we know its should come from category 1
+            console.log(`This is from cat 1`);
             startCategory = 0; // 1st category holds indices 0-9
             findQuestion(startCategory, pointValue); // go find a question based on the starting index and point value
         } else if (parentCat == "questions2") {
+            console.log("this is from cat 2");
             startCategory = 10; // 2nd cat holds indices 10-19
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions3") {
+            console.log("this is from cat3");
             startCategory = 20; // 3rd cat holds indices 20-29
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions4") {
+            console.log("this is from cat4");
             startCategory = 30; // etc
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions5") {
+            console.log("this is from cat5");
             startCategory = 40;
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions6") {
+            console.log("this is from cat6");
             startCategory = 50;
             findQuestion(startCategory, pointValue);
         } else {
