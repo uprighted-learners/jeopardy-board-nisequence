@@ -88,9 +88,9 @@ async function fetchCategories() {
 
 async function findQuestion(cat, points) {
     //console.log(`You selected a question from the category beginning at array #${cat} worth ${points} points.`);
-    let howToFind = cat + ((points / 100) - 2);
+    let howToFind = cat + (((points / 100) - 2) / 2); //! new formula to get different questions from round 1
     /*
-    The howToFind variable calculates the exact index for the question that has been selected based on the category and the point value. For example, point value 200 equates to the 1st question in a category (index 0 for category one), while point value 1000 equates to the 9th question in a category (index 8 for category one).
+    The howToFind variable calculates the exact index for the question that has been selected based on the category and the point value. For example, point value 400 equates to the 2nd question in a category (index 1 for category one), while point value 1000 equates to the 10th question in a category (index 9 for category one).
     */
    try {
        let res = await fetch(qSource); // go get the file
