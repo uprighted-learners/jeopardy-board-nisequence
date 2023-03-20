@@ -1,5 +1,6 @@
 /** INDEX (HOME) CSS */
 
+/* setting the grid template for the index page ONLY */
 #landingBody {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: black;
@@ -44,6 +45,7 @@
     border-style: solid;
 }
 
+/* when hovering over button */
 #startGame:hover {
     background-color:rgb(28, 0, 128);
     border-color: white;
@@ -51,6 +53,7 @@
     border-style: solid;
 }
 
+/* footer to fit within index grid ONLY */
 #landingFooter {
     display: grid;
     grid-column: 1 / span 3;
@@ -63,7 +66,7 @@
 
 /** ROUND CSS */
 
-/* separate class for roundBody so that flex display is not disturbed by css changes to index */
+/* separate class for roundBody so that index is not disturbed by css changes */
 .roundBody {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: black;
@@ -102,23 +105,11 @@
     margin-bottom: 2vh;
 }
 
+/* to change colors when teams swap turns */
 .teamUpRed {
-    /* ! for use with timer to alert players of change */
-    grid-row: 2 / span 1;
-    font-weight: bold;
-    font-size: large;
-    margin-top: 0.25vh;
-    margin-bottom: 2vh;
     color: red;
 }
-
 .teamUpBlue {
-    /* ! for use with timer to alert players of change */
-    grid-row: 2 / span 1;
-    font-weight: bold;
-    font-size: large;
-    margin-top: 0.25vh;
-    margin-bottom: 2vh;
     color: blue;
 }
 
@@ -271,11 +262,13 @@
     align-content: space-evenly;
 }
 
+/* when hovering over question cards */
 .questionCard:hover {
     color: darkred;
     border-color:black;
 }
 
+/* class used to hide question cards once used */
 .hide {
     display: grid;
     padding-top: 2.5vh;
@@ -290,20 +283,24 @@
     align-content: space-evenly;
 }
 
+/* id used to hide section that holds the giant question card */
 #hideIt {
     display: none;
 }
 
+/* class for the section that holds the giant question card */
 .superSecret {
     position: fixed;
     width: 100vw;
     height: 80vh;
 }
 
+/* id used to hide the giant question card */
 #invis {
     display:none;
 }
 
+/* class for the giant question card */
 .questionSelected {
     display: grid;
     align-content: center;
@@ -311,7 +308,7 @@
     text-align: center;
     background-color: darkblue;
     width: 75vw;
-    height: 45vh;
+    height: 40vh;
     border: 2px;
     border-style: solid;
     border-color: rgb(255, 213, 0);

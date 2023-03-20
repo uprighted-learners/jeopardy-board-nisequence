@@ -215,6 +215,7 @@ async function checkIfLimitReached() {
 }
 
 // ? On Page Load --->
+
 fetchCategories(); // labels the category headers
 
 // * This for loop makes each of the cards clickable and identifies which card is which
@@ -243,7 +244,7 @@ for (let i = 0; i < newQCardArray.length; i++) { // make the questions clickable
         } else {
             console.error("something went wrong....");
         }
-        newQCardArray[i].className = "hide"; // makes the question fade to the background
+        newQCardArray[i].className = "hide"; // makes the mini question card fade to the background
         runningTotal--; // one less question to choose from!
     }
 }

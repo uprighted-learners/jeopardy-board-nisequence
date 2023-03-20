@@ -1,33 +1,13 @@
-/*
-? FINAL ROUND --->
-let aUrlPts = glean from URL;
-console.log(aUrlPts);
-let aPts.textContent = aUrlPts;
-console.log(aPts.textContent);
-let bUrlPts = glean from URL;
-console.log(bUrlPts);
-let bPts.textContent = bUrlPts;
-console.log(bPts.textContent);
-*/
-
 //! Do not change the import statement
 // This statement imports the exported file so its contents are accessible to us.
 // This makes the "placeholderQuestions" act like a variable (essentially).
 import placeholderQuestions from "./placeholder-questions.js";
 // Is an object whose contents are the file's data
-console.log({ placeholderQuestions });
+// console.log({ placeholderQuestions });
 // ------------------------------
-//console.log(placeholderQuestions[0]); //!test
+//console.log(placeholderQuestions[0]);
 // When I need a question/answer, I can iterate over the array.
 // ------------------------------
-/*
-! NEXT PAGE --->
-let aUrlPts = glean from URL;
-let aPts.textContent = aUrlPts;
-console.log(aPts.textContent);
-use odd numbered questions
-*/
-//! delete the above when done
 
 // ? Variables for HTML Items
 
@@ -42,11 +22,6 @@ let finalCat = document.getElementById("finalCatTextHere");
 let finalQues = document.getElementById("finalQuesTextHere");
 let finalAns;
 
-/* invisible question box & section
-let questionSelected = document.getElementsByClassName("questionSelected");
-let selectionSection = document.getElementsByClassName("superSecret");
-*/
-
 //* The stuff at the bottom of the page
 let ptsInput = document.getElementById("pointsHere");
 let ansInput = document.getElementById("finalAnsBox");
@@ -60,18 +35,17 @@ let submit = document.getElementById("sendIt"); // the submit button itself
 
 // * Header-Related Variables
 let params = new URLSearchParams(document.location.search);
-let aPtsVar = parseInt(params.get('aPoints')); //! need to make sure this works
+let aPtsVar = parseInt(params.get('aPoints'));
 aPts.innerText = aPtsVar + " PTS";
-let bPtsVar = parseInt(params.get('bPoints')); //! need to make sure this works
+let bPtsVar = parseInt(params.get('bPoints'));
 bPts.innerText = bPtsVar + " PTS";
 
 // * Question Fetching & Assignment Variables
 let qSource = "scripts/questions.json"; // where to find the questions to jsonify
-//!
-let parentCat; // temp variable for the category that each question belongs to
-let pointValue; // temp variable to hold the point value for each question
-let startCategory; // temp variable to find the starting point within the JSON file given the category needed (based on parentCat variable)
 
+// ? Functions
+
+// * List the final category
 async function fetchCategory() {
     fetch(qSource) // go get the file
         .then (result => result.json()) // jsonify it
@@ -83,6 +57,7 @@ async function fetchCategory() {
         .catch((err) => console.error(err));
 }
 
+// * Take Team A's wager first
 async function gatherABet() {
     submit.onclick = () => { // when the first user clicks the submit button
         if (parseInt(ptsInput.value) <= aPtsVar && parseInt(ptsInput.value) >= 0) {
@@ -98,10 +73,10 @@ async function gatherABet() {
             ptsInput.value = ""; // reset point box
             ansInput.value = ""; // reset answer
             gatherBBet();
-        } else if (parseInt(ptsInput.value) > aPtsVar || parseInt(ptsInput.value < 0)) {
+        } else if (parseInt(ptsInput.value) > aPtsVar || parseInt(ptsInput.value) < 0) {
             ansInput.value = "Team A wager amount not accepted!";
             gatherABet();
-        } else { //! not sure why negative guesses fall here
+        } else {
             console.log(ptsInput.value);
             ansInput.value = "Letters detected in Team A wager!";
             gatherABet();
@@ -109,6 +84,7 @@ async function gatherABet() {
     }
 }
 
+// * Take Team B's wager
 async function gatherBBet() {
     submit.onclick = () => { // when the 2nd user clicks the submit button
         if (parseInt(ptsInput.value) <= bPtsVar && parseInt(ptsInput.value) >= 0) {
@@ -135,13 +111,12 @@ async function gatherBBet() {
     
 }
 
+// * Announce the final question
 async function finalQuestion() {
-    console.log(finalAns); //! testing
     try {
        let res = await fetch(qSource); // go get the file
         let results = await res.json(); // jsonify it
         let data = results.placeholderQuestions[60]; // pull out the exact object I want
-        console.log(data); //! for testing purposes
         finalQues.innerText = data.question; // insert the question onto the card
         submitAnswers();
     } catch(err) {
@@ -149,6 +124,7 @@ async function finalQuestion() {
     }
 }
 
+// * Take and save each team's response
 async function submitAnswers() {
     submit.onclick = () => { // When Team A clicks submit
         aGuess = ansInput.value; // save guess from Team A
@@ -165,6 +141,7 @@ async function submitAnswers() {
     }
 }
 
+// * Figure out if one or both teams are correct
 async function answerAnalysis() {
     // Check Team A first
     if (aGuess == finalAns) { // correct
@@ -182,6 +159,7 @@ async function answerAnalysis() {
     announceWinner();
 }
 
+// * Add points to the correct team
 async function addPoints(team, pointAmount) {
     let pointDigit = parseInt(pointAmount);
     if (team == "A") {
@@ -195,6 +173,7 @@ async function addPoints(team, pointAmount) {
     }
 }
 
+// * Subtract points from the correct team
 async function subtractPoints(team, pointAmount) {
     let pointDigit = parseInt(pointAmount);
     if (team == "A") {
@@ -208,18 +187,17 @@ async function subtractPoints(team, pointAmount) {
     }
 }
 
+// * Display the winner where the question used to be
 async function announceWinner() {
+    console.log(`This is the points for Team A: ${aPtsVar}`);
+    console.log(`This is the pts for Team B: ${bPtsVar}`);
     if (aPtsVar > bPtsVar) {
-        console.log("Team A wins!");
         finalQues.innerText = "Team A wins!";
-    } else if (bPtsVar < aPtsVar) {
-        console.log("Team B wins!");
+    } else if (bPtsVar > aPtsVar) {
         finalQues.innerText = "Team B wins!";
-    } else if (aPtsVar === bPtsVar) {
-        console.log("It's a tie!");
+    } else if (aPtsVar == bPtsVar) {
         finalQues.innerText = "It's a tie!";
     } else {
-        console.log("Sorry, I'm confused.");
         finalQues.innerText = "Sorry, I'm confused...";
     }
 }

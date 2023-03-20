@@ -63,6 +63,9 @@ let startCategory; // temp variable to find the starting point within the JSON f
 let newQCardArray = Array.from(qCardCollection); // converts question cards into an array
 let runningTotal = 30; // keep track of all available questions
 
+// ? Functions
+
+// * This function fills in the categories
 async function fetchCategories() {
     fetch(qSource) // go get the file
         .then (result => result.json()) // jsonify it
@@ -77,7 +80,7 @@ async function fetchCategories() {
         .catch((err) => console.error(err));
 }
 
-
+// * This function will find a question for a given question card when clicked
 async function findQuestion(cat, points) {
     //console.log(`You selected a question from the category beginning at array #${cat} worth ${points} points.`);
     let howToFind = cat + (((points / 100) - 2) / 2); // new formula to get different questions from round 1
@@ -137,6 +140,7 @@ async function alertChange() {
     }
 }
 
+// * This function allows passing once per question and tracks when it is time to discard a question
 async function enablePass() {
     pass1.onclick = () => {
         tagTeam++; // advance to the next team's turn
@@ -158,6 +162,7 @@ async function enablePass() {
     }
 }
 
+// * This function adds points to the correct team
 async function addPoints(pointAmount) {
     let pointDigit = parseInt(pointAmount);
     if (teamUp.textContent == ">>> Team A <<<") {
@@ -171,6 +176,7 @@ async function addPoints(pointAmount) {
     }
 }
 
+// * This function subtracts points from the correct team
 async function subtractPoints(pointAmount) {
     let pointDigit = parseInt(pointAmount);
     if (teamUp.textContent == ">>> Team A <<<") {
@@ -184,11 +190,13 @@ async function subtractPoints(pointAmount) {
     }
 }
 
+// * This function will take the giant question card and invisible section away
 async function hideTheQuestion() { // call this after both teams get it wrong and/or pass
     questionSelected[0].id = "invis";
     selectionSection[0].id = "hideIt";
 }
 
+// * This function turns off the ability for the teams to guess after the question has been discarded
 async function endGuessing() {
     guess1.onclick = () => {
         console.log("Do nothing");
@@ -196,19 +204,21 @@ async function endGuessing() {
     checkIfLimitReached();
 }
 
+// * This function monitors whether or not it is time for the users to move on to the final round
 async function checkIfLimitReached() {
-    if (aPtsVar >= 15000 || bPtsVar >= 30000 || runningTotal == 0) { // if either team has at least 15000 or if all questions are used
+    if (aPtsVar >= 30000 || bPtsVar >= 30000 || runningTotal == 0) { // if either team has at least 30000 or if all questions are used
         selectionSection[0].id = ""; // disable selection of more questions
         questionSelected[0].id = ""; // reusing this for an alert because I'm short on time
-        questionSelected[0].innerText = "All questions have been answered or 15000 points has been reached. Please move to the next round.";
+        questionSelected[0].innerText = "All questions have been answered or 30000 points have been obtained by at least one team.\n\nPlease move to the final round.";
         next1.onclick = () => {
             console.log(`I need to send the users to a URL to Final Round with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
             document.location = finalLink + aPtsVar + "&bPoints=" + bPtsVar;
         }
     }
 }
-// --------------------
-// * On Page Load --->
+
+// ? On Page Load --->
+
 fetchCategories(); // label the category headers
 for (let i = 0; i < newQCardArray.length; i++) { // make the questions clickable
     newQCardArray[i].onclick = () => {
@@ -241,15 +251,7 @@ for (let i = 0; i < newQCardArray.length; i++) { // make the questions clickable
         } else {
             console.error("something went wrong....");
         }
-        newQCardArray[i].className = "hide"; // makes the question fade to the background
+        newQCardArray[i].className = "hide"; // makes the mini question card fade to the background
         runningTotal--; // one less question to choose from!
     }
 }
-
-/*
-? NEXT PAGE --->
-let aUrlPts = glean from URL;
-let aPts.textContent = aUrlPts;
-console.log(aPts.textContent);
-use odd numbered questions
-*/

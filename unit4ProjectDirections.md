@@ -160,7 +160,7 @@ And all players get a chance to answer the question before the answer is reveale
 ~~~
 
 ## Winning the Game
-~~~
+~~~ 
 Given all players have answered the final question
 
 When the last answer is submitted
