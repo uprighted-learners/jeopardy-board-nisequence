@@ -3,19 +3,11 @@
 // This makes the "placeholderQuestions" act like a variable (essentially).
 import placeholderQuestions from "./placeholder-questions.js";
 // Is an object whose contents are the file's data
-console.log({ placeholderQuestions });
+//console.log({ placeholderQuestions });
 // ------------------------------
-console.log(placeholderQuestions[0]); //!test
+//console.log(placeholderQuestions[0]);
 // When I need a question/answer, I can iterate over the array.
 // ------------------------------
-/*
-! NEXT PAGE --->
-let aUrlPts = glean from URL;
-let aPts.textContent = aUrlPts;
-console.log(aPts.textContent);
-use odd numbered questions
-*/
-//! delete the above when done
 
 // ? Variables for HTML Items
 
@@ -34,7 +26,6 @@ let cat6 = document.getElementById("cat6");
 
 //* All the Question Cards
 let qCardCollection = document.getElementsByClassName("questionCard");
-console.log(qCardCollection); //!test
 
 //* The temporarily invisible question box & section
 let questionSelected = document.getElementsByClassName("questionSelected");
@@ -45,7 +36,7 @@ let next1 = document.getElementById("next2");
 let pass1 = document.getElementById("pass2");
 let guess1 = document.getElementById("guess2");
 let ansInput = document.getElementById("answerBox");
-let finalLink = "./final-jeopardy.html?aPoints="; //! need to test
+let finalLink = "./final-jeopardy.html?aPoints=";
 
 // ? Other Global Variables
 
@@ -54,9 +45,9 @@ let teamArray = [">>> Team B <<<", ">>> Team A <<<"];
 let tagTeam = 0; // determines whether to use index 0 or 1 of teamArray
 let attempts = 0; // determines when it is time to move on from a question
 let params = new URLSearchParams(document.location.search);
-let aPtsVar = parseInt(params.get('aPoints')); //! need to make sure this works
+let aPtsVar = parseInt(params.get('aPoints'));
 aPts.innerText = aPtsVar + " PTS";
-let bPtsVar = parseInt(params.get('bPoints')); //! need to make sure this works
+let bPtsVar = parseInt(params.get('bPoints'));
 bPts.innerText = bPtsVar + " PTS";
 
 // * Category Fetching Variables
@@ -70,7 +61,6 @@ let parentCat; // temp variable for the category that each question belongs to
 let pointValue; // temp variable to hold the point value for each question
 let startCategory; // temp variable to find the starting point within the JSON file given the category needed (based on parentCat variable)
 let newQCardArray = Array.from(qCardCollection); // converts question cards into an array
-console.log(newQCardArray); //! test
 let runningTotal = 30; // keep track of all available questions
 
 async function fetchCategories() {
@@ -90,7 +80,7 @@ async function fetchCategories() {
 
 async function findQuestion(cat, points) {
     //console.log(`You selected a question from the category beginning at array #${cat} worth ${points} points.`);
-    let howToFind = cat + (((points / 100) - 2) / 2); //! new formula to get different questions from round 1
+    let howToFind = cat + (((points / 100) - 2) / 2); // new formula to get different questions from round 1
     /*
     The howToFind variable calculates the exact index for the question that has been selected based on the category and the point value. For example, point value 400 equates to the 2nd question in a category (index 1 for category one), while point value 1000 equates to the 10th question in a category (index 9 for category one).
     */
@@ -121,7 +111,7 @@ async function findQuestion(cat, points) {
                     tagTeam = tagTeam - 2; // reset teamArray starting point
                 }
                 teamUp.textContent = teamArray[tagTeam]; // switch teams
-                //! maybe do more fancy stuff later if time
+                alertChange(); // changes color of teamUp
                 if (attempts > 1) { // if 2 or more attempts have been made on this question
                     hideTheQuestion();
                     endGuessing();
@@ -129,10 +119,21 @@ async function findQuestion(cat, points) {
                     // now we are ready for a new question to be selected
                 }
             }
-            ansInput.value = ""; //! test this
+            ansInput.value = "";
         }
     } catch(err) {
         console.error(err);
+    }
+}
+
+//* This function will change the color of the teamUp header based on which team is up
+async function alertChange() {
+    if (teamUp.textContent === teamArray[1]) {
+        teamUp.className = "teamUpRed";
+    } else if (teamUp.textContent === teamArray[0]) {
+        teamUp.className = "teamUpBlue";
+    } else {
+        console.log("Well, I guess there'll be no color changing here...");
     }
 }
 
@@ -144,7 +145,7 @@ async function enablePass() {
             tagTeam = tagTeam - 2; // reset teamArray starting point
         }
         teamUp.textContent = teamArray[tagTeam]; // switch teams
-        //! maybe do more fancy stuff later if time
+        alertChange(); // changes color of teamUp
         if (attempts > 1) { // if 2 or more attempts have been made on this question
             hideTheQuestion();
             endGuessing();
@@ -190,20 +191,19 @@ async function hideTheQuestion() { // call this after both teams get it wrong an
 
 async function endGuessing() {
     guess1.onclick = () => {
-        console.log("Do nothing"); //! testing
+        console.log("Do nothing");
     }
     checkIfLimitReached();
 }
 
 async function checkIfLimitReached() {
-    if (aPtsVar >= 15000 || bPtsVar >= 15000 || runningTotal == 0) { // if either team has at least 15000 or if all questions are used //! update this to 30000 later
+    if (aPtsVar >= 15000 || bPtsVar >= 30000 || runningTotal == 0) { // if either team has at least 15000 or if all questions are used
         selectionSection[0].id = ""; // disable selection of more questions
         questionSelected[0].id = ""; // reusing this for an alert because I'm short on time
         questionSelected[0].innerText = "All questions have been answered or 15000 points has been reached. Please move to the next round.";
         next1.onclick = () => {
             console.log(`I need to send the users to a URL to Final Round with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
             document.location = finalLink + aPtsVar + "&bPoints=" + bPtsVar;
-            //! don't forget to test this
         }
     }
 }

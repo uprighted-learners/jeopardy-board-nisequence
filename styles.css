@@ -28,6 +28,7 @@
     margin-right:auto;
 }
 
+/* button to move to round 1 */
 #startGame {
     display: grid;
     grid-column: 2 / span 1;
@@ -69,8 +70,8 @@
     display: grid;
     grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
     /* columns are evenly distributed */
-    grid-template-rows: 8vh 4vh 13vh 10.75vh 10.75vh 10.75vh 10.75vh 10.75vh 6vh 4vh 4vh;
-    /* rows are very specifically defined to fit their elements based on viewport */
+    grid-template-rows: 8vh 4vh 13vh 10.75vh 10.75vh 10.75vh 10.75vh 10.75vh 8vh 6vh 4vh;
+    /* rows are defined to fit the elements based on viewport */
     /* ! not quite mobile friendly (maybe someday) */
 }
 
@@ -99,18 +100,26 @@
     font-size: larger;
     margin-top: 0.25vh;
     margin-bottom: 2vh;
-    color: white;
 }
 
-#teamUp2 {
+.teamUpRed {
     /* ! for use with timer to alert players of change */
-    display: grid;
     grid-row: 2 / span 1;
     font-weight: bold;
-    font-weight: large;
-    margin-top: 0px;
+    font-size: large;
+    margin-top: 0.25vh;
     margin-bottom: 2vh;
-    color: purple;
+    color: red;
+}
+
+.teamUpBlue {
+    /* ! for use with timer to alert players of change */
+    grid-row: 2 / span 1;
+    font-weight: bold;
+    font-size: large;
+    margin-top: 0.25vh;
+    margin-bottom: 2vh;
+    color: blue;
 }
 
 /* points: <section> class name */

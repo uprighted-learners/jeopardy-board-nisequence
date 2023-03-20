@@ -8,6 +8,7 @@ import placeholderQuestions from "./placeholder-questions.js";
 //console.log(placeholderQuestions[0]); //test
 // When I need a question/answer, I can iterate over the array.
 // ------------------------------
+
 // ? Variables for HTML Items
 
 //* Round Header
@@ -35,7 +36,7 @@ let pass1 = document.getElementById("pass1");
 let ansInput = document.getElementById("answerBox");
 let guess1 = document.getElementById("guess1");
 let next1 = document.getElementById("next1");
-let roundTwo = "./round-2.html?aPoints="; //! need to test
+let roundTwo = "./round-2.html?aPoints=";
 
 // ? Other Global Variables
 
@@ -110,7 +111,7 @@ async function findQuestion(cat, points) {
                     tagTeam = tagTeam - 2; // reset teamArray starting point
                 }
                 teamUp.textContent = teamArray[tagTeam]; // switch teams
-                //! maybe do more fancy stuff later if time
+                alertChange(); // changes teamUp color
                 if (attempts > 1) { // if 2 or more attempts have been made on this question
                     hideTheQuestion();
                     endGuessing();
@@ -118,10 +119,21 @@ async function findQuestion(cat, points) {
                     // now we are ready for a new question to be selected
                 }
             }
-            ansInput.value = ""; //! test this
+            ansInput.value = "";
         }
     } catch(err) {
         console.error(err);
+    }
+}
+
+//* This function will change the color of the teamUp header based on which team is up
+async function alertChange() {
+    if (teamUp.textContent === teamArray[0]) {
+        teamUp.className = "teamUpRed";
+    } else if (teamUp.textContent === teamArray[1]) {
+        teamUp.className = "teamUpBlue";
+    } else {
+        console.log("Well, I guess there'll be no color changing here...");
     }
 }
 
@@ -134,7 +146,7 @@ async function enablePass() {
             tagTeam = tagTeam - 2; // reset teamArray starting point
         }
         teamUp.textContent = teamArray[tagTeam]; // switch teams
-        //! maybe do more fancy stuff later if time
+        alertChange(); // changes color of teamUp
         if (attempts > 1) { // if 2 or more attempts have been made on this question
             hideTheQuestion();
             endGuessing();
@@ -184,7 +196,6 @@ async function hideTheQuestion() { // call this after both teams have had a chan
 // * This function turns off the ability for the teams to guess after the question has been discarded
 async function endGuessing() {
     guess1.onclick = () => {
-        console.log("Do nothing"); //! testing
     }
     checkIfLimitReached();
 }
