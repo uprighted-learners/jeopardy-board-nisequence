@@ -96,8 +96,21 @@
     display: grid;
     grid-row: 2 / span 1;
     font-weight: bold;
+    font-size: x-large;
     margin-top: 0px;
     margin-bottom: 2vh;
+    color: white;
+}
+
+#teamUp2 {
+    /* ! for use with timer to alert players of change */
+    display: grid;
+    grid-row: 2 / span 1;
+    font-weight: bold;
+    font-weight: large;
+    margin-top: 0px;
+    margin-bottom: 2vh;
+    color: purple;
 }
 
 /* points: <section> class name */

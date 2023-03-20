@@ -8,6 +8,15 @@ import placeholderQuestions from "./placeholder-questions.js";
 //console.log(placeholderQuestions[0]); //test
 // When I need a question/answer, I can iterate over the array.
 // ------------------------------
+/*
+! NEXT PAGE --->
+let aUrlPts = glean from URL;
+let aPts.textContent = aUrlPts;
+console.log(aPts.textContent);
+use odd numbered questions
+*/
+//! delete the above when done
+
 // ? Variables for HTML Items
 
 //* Round Header
@@ -31,11 +40,11 @@ let questionSelected = document.getElementsByClassName("questionSelected");
 let selectionSection = document.getElementsByClassName("superSecret");
 
 //* The stuff at the bottom of the page
-let pass1 = document.getElementById("pass1");
+let next1 = document.getElementById("next2");
+let pass1 = document.getElementById("pass2");
+let guess1 = document.getElementById("guess2");
 let ansInput = document.getElementById("answerBox");
-let guess1 = document.getElementById("guess1");
-let next1 = document.getElementById("next1");
-let roundTwo = "./round-2.html"; //! need to use
+let finalLink = "./final-jeopardy.html"; //! need to use
 
 // ? Other Global Variables
 
@@ -43,8 +52,11 @@ let roundTwo = "./round-2.html"; //! need to use
 let teamArray = [">>> Team A <<<", ">>> Team B <<<"];
 let tagTeam = 0; // determines whether to use index 0 or 1 of teamArray
 let attempts = 0; // determines when it is time to move on from a question
-let aPtsVar = 0; // running total of how many points Team A has
-let bPtsVar = 0; // running total of how many points Team B has
+////let aPtsVar = 0; // running total of how many points Team A has
+////let bPtsVar = 0; // running total of how many points Team B has
+let params = new URLSearchParams(document.location.search);
+let aPtsVar = params.get('aPtsVar'); //! need to make sure this works
+let bPtsVar = params.get('bPtsVar'); //! need to make sure this works
 
 // * Category Fetching Variables
 let catArray = [cat1, cat2, cat3, cat4, cat5, cat6]; // group headers
@@ -59,9 +71,6 @@ let startCategory; // temp variable to find the starting point within the JSON f
 let newQCardArray = Array.from(qCardCollection); // converts question cards into an array
 let runningTotal = 30; // keep track of all available questions
 
-// ? The Functions!
-
-// * This function fills in the categories
 async function fetchCategories() {
     fetch(qSource) // go get the file
         .then (result => result.json()) // jsonify it
@@ -76,7 +85,7 @@ async function fetchCategories() {
         .catch((err) => console.error(err));
 }
 
-// * This function will find a question for a given question card when clicked
+
 async function findQuestion(cat, points) {
     //console.log(`You selected a question from the category beginning at array #${cat} worth ${points} points.`);
     let howToFind = cat + ((points / 100) - 2);
@@ -94,7 +103,6 @@ async function findQuestion(cat, points) {
         questionSelected[0].innerText = data.question; // insert the question onto the card
         enablePass(); // give the team opportunity to use the pass button
         guess1.onclick = () => { // when the user clicks the guess button
-            ansInput.value = ""; //! test this
             if (ansInput.value == data.answer) { // correct
                 addPoints(points); // give the correct team points
                 hideTheQuestion();
@@ -125,7 +133,6 @@ async function findQuestion(cat, points) {
     }
 }
 
-// * This function allows passing once per question and tracks when it is time to discard a question
 async function enablePass() {
     pass1.onclick = () => {
         tagTeam++; // advance to the next team's turn
@@ -147,7 +154,6 @@ async function enablePass() {
     }
 }
 
-// * This function adds points to the correct team
 async function addPoints(pointAmount) {
     let pointDigit = parseInt(pointAmount);
     if (teamUp.textContent == ">>> Team A <<<") {
@@ -161,7 +167,6 @@ async function addPoints(pointAmount) {
     }
 }
 
-// * This function subtracts points from the correct team
 async function subtractPoints(pointAmount) {
     let pointDigit = parseInt(pointAmount);
     if (teamUp.textContent == ">>> Team A <<<") {
@@ -175,13 +180,11 @@ async function subtractPoints(pointAmount) {
     }
 }
 
-// * This function will take the giant question card and invisible section away
-async function hideTheQuestion() { // call this after both teams have had a chance or one team is correct
+async function hideTheQuestion() { // call this after both teams get it wrong and/or pass
     questionSelected[0].id = "invis";
     selectionSection[0].id = "hideIt";
 }
 
-// * This function turns off the ability for the teams to guess after the question has been discarded
 async function endGuessing() {
     guess1.onclick = () => {
         console.log("Do nothing"); //! testing
@@ -189,24 +192,20 @@ async function endGuessing() {
     checkIfLimitReached();
 }
 
-// * This function monitors whether or not it is time for the users to move on to the next round
 async function checkIfLimitReached() {
     if (aPtsVar >= 15000 || bPtsVar >= 15000 || runningTotal == 0) { // if either team has at least 15000 or if all questions are used
         selectionSection[0].id = ""; // disable selection of more questions
         questionSelected[0].id = ""; // reusing this for an alert because I'm short on time
-        questionSelected[0].innerText = "All questions have been answered or 15000 points have been obtained byS at least one team.\nPlease move to the next round.";
+        questionSelected[0].innerText = "All questions have been answered or 15000 points has been reached. Please move to the next round.";
         next1.onclick = () => {
             console.log(`I need to send the users to a URL to page two with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
-            document.location = roundTwo + aPtsVar + bPtsVar;
-            //! don't forget to test this
+            //! don't forget to actually do this
         }
     }
 }
-
-// ? On Page Load --->
-fetchCategories(); // labels the category headers
-
-// * This for loop makes each of the cards clickable and identifies which card is which
+// --------------------
+// * On Page Load --->
+fetchCategories(); // label the category headers
 for (let i = 0; i < newQCardArray.length; i++) { // make the questions clickable
     newQCardArray[i].onclick = () => {
         parentCat = newQCardArray[i].parentNode.id; // e.g. "questions1"
@@ -236,3 +235,11 @@ for (let i = 0; i < newQCardArray.length; i++) { // make the questions clickable
         runningTotal--; // one less question to choose from!
     }
 }
+
+/*
+? NEXT PAGE --->
+let aUrlPts = glean from URL;
+let aPts.textContent = aUrlPts;
+console.log(aPts.textContent);
+use odd numbered questions
+*/
