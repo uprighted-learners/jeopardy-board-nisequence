@@ -62,14 +62,12 @@ async function gatherABet() {
     submit.onclick = () => { // when the first user clicks the submit button
         if (parseInt(ptsInput.value) <= aPtsVar && parseInt(ptsInput.value) >= 0) {
             aBet = parseInt(ptsInput.value); // save wager amount for Team A
-            console.log(aBet);
             ptsInput.value = ""; // reset point box
             ansInput.value = ""; // reset answer
             gatherBBet();
         } else if (parseInt(ptsInput.value) === 0) {
             // exception for if Team A has negative points
             aBet = parseInt(ptsInput.value); // save wager amount for Team A
-            console.log(aBet);
             ptsInput.value = ""; // reset point box
             ansInput.value = ""; // reset answer
             gatherBBet();
@@ -77,7 +75,7 @@ async function gatherABet() {
             ansInput.value = "Team A wager amount not accepted!";
             gatherABet();
         } else {
-            console.log(ptsInput.value);
+            //console.log(ptsInput.value);
             ansInput.value = "Letters detected in Team A wager!";
             gatherABet();
         }
@@ -89,14 +87,12 @@ async function gatherBBet() {
     submit.onclick = () => { // when the 2nd user clicks the submit button
         if (parseInt(ptsInput.value) <= bPtsVar && parseInt(ptsInput.value) >= 0) {
             bBet = parseInt(ptsInput.value); // save wager amount for Team B
-            console.log(bBet);
             ptsInput.value = ""; // reset point box
             ansInput.value = ""; // reset answer
             finalQuestion();
         } else if (parseInt(ptsInput.value) === 0) {
             // exception for if Team B has negative points
             bBet = parseInt(ptsInput.value); // save wager amount for Team B
-            console.log(bBet);
             ptsInput.value = ""; // reset point box
             ansInput.value = ""; // reset answer
             finalQuestion();
@@ -128,12 +124,10 @@ async function finalQuestion() {
 async function submitAnswers() {
     submit.onclick = () => { // When Team A clicks submit
         aGuess = ansInput.value; // save guess from Team A
-        console.log(aGuess);
         ansInput.value = "Team A answer confirmed."; // reset answer
         ptsInput.value = ""; // reset point box
         submit.onclick = () => { // When Team B clicks submit
             bGuess = ansInput.value; // save guess from Team B
-            console.log(bGuess);
             ansInput.value = "Team B answer confirmed."; // reset answer
             ptsInput.value = ""; // reset point box
             answerAnalysis();
@@ -189,8 +183,6 @@ async function subtractPoints(team, pointAmount) {
 
 // * Display the winner where the question used to be
 async function announceWinner() {
-    console.log(`This is the points for Team A: ${aPtsVar}`);
-    console.log(`This is the pts for Team B: ${bPtsVar}`);
     if (aPtsVar > bPtsVar) {
         finalQues.innerText = "Team A wins!";
     } else if (bPtsVar > aPtsVar) {
