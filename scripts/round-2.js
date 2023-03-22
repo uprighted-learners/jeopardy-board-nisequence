@@ -91,9 +91,9 @@ async function findQuestion(cat, points) {
        let res = await fetch(qSource); // go get the file
         let results = await res.json(); // jsonify it
         let data = results.placeholderQuestions[howToFind]; // pull out the exact object I want
-        console.log(data); //! for testing purposes
+        //console.log(data); //! for testing purposes
         selectionSection[0].id = ""; // this will make it impossible for user to select a new question until the current one has been dealt with
-        //! add onclick event for selectionSection that tells user to answer or pass
+        answerOrPass();
         questionSelected[0].id = ""; // show the question card
         questionSelected[0].innerText = data.question; // insert the question onto the card
         enablePass(); // give the team opportunity to use the pass button
@@ -126,6 +126,17 @@ async function findQuestion(cat, points) {
         }
     } catch(err) {
         console.error(err);
+    }
+}
+
+//* This message alerts the user how to proceed if they are clicking in the general vicinity of the giant question card instead of the button section.
+async function answerOrPass() {
+    selectionSection[0].onclick = () => {
+        ansInput.value = "You must either make a guess or pass your turn!";
+        selectionSection[0].onclick = () => {
+            ansInput.value = "";
+            answerOrPass();
+        }
     }
 }
 
@@ -198,8 +209,9 @@ async function hideTheQuestion() { // call this after both teams get it wrong an
 
 // * This function turns off the ability for the teams to guess after the question has been discarded
 async function endGuessing() {
-    guess1.onclick = () => {
-        console.log("Do nothing");
+    guess1.onclick = () => { // guess button does nothing
+    }
+    pass1.onclick = () => { // when guessing stops, pass should also stop working
     }
     checkIfLimitReached();
 }
@@ -211,7 +223,6 @@ async function checkIfLimitReached() {
         questionSelected[0].id = ""; // reusing this for an alert because I'm short on time
         questionSelected[0].innerText = "All questions have been answered or 30000 points have been obtained by at least one team.\n\nPlease move to the final round.";
         next1.onclick = () => {
-            console.log(`I need to send the users to a URL to Final Round with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
             document.location = finalLink + aPtsVar + "&bPoints=" + bPtsVar;
         }
     }
@@ -225,27 +236,21 @@ for (let i = 0; i < newQCardArray.length; i++) { // make the questions clickable
         parentCat = newQCardArray[i].parentNode.id; // e.g. "questions1"
         pointValue = newQCardArray[i].innerText; // e.g. "200"
         if (parentCat == "questions1") { // if the question card selected belongs to the section called "question1", we know its should come from category 1
-            console.log(`This is from cat 1`);
             startCategory = 0; // 1st category holds indices 0-9
             findQuestion(startCategory, pointValue); // go find a question based on the starting index and point value
         } else if (parentCat == "questions2") {
-            console.log("this is from cat 2");
             startCategory = 10; // 2nd cat holds indices 10-19
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions3") {
-            console.log("this is from cat3");
             startCategory = 20; // 3rd cat holds indices 20-29
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions4") {
-            console.log("this is from cat4");
             startCategory = 30; // etc
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions5") {
-            console.log("this is from cat5");
             startCategory = 40;
             findQuestion(startCategory, pointValue);
         } else if (parentCat == "questions6") {
-            console.log("this is from cat6");
             startCategory = 50;
             findQuestion(startCategory, pointValue);
         } else {

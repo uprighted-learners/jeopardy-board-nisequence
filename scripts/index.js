@@ -88,9 +88,9 @@ async function findQuestion(cat, points) {
        let res = await fetch(qSource); // go get the file
         let results = await res.json(); // jsonify it
         let data = results.placeholderQuestions[howToFind]; // pull out the exact object I want
-        console.log(data); //! for testing purposes
+        //console.log(data); //! for testing purposes
         selectionSection[0].id = ""; // this will make it impossible for user to select a new question until the current one has been dealt with
-        //! add onclick event for selectionSection that tells user to answer or pass
+        answerOrPass();
         questionSelected[0].id = ""; // show the question card
         questionSelected[0].innerText = data.question; // insert the question onto the card
         enablePass(); // give the team opportunity to use the pass button
@@ -123,6 +123,17 @@ async function findQuestion(cat, points) {
         }
     } catch(err) {
         console.error(err);
+    }
+}
+
+//* This message alerts the user how to proceed if they are clicking in the general vicinity of the giant question card instead of the button section.
+async function answerOrPass() {
+    selectionSection[0].onclick = () => {
+        ansInput.value = "You must either make a guess or pass your turn!";
+        selectionSection[0].onclick = () => {
+            ansInput.value = "";
+            answerOrPass();
+        }
     }
 }
 
@@ -195,7 +206,9 @@ async function hideTheQuestion() { // call this after both teams have had a chan
 
 // * This function turns off the ability for the teams to guess after the question has been discarded
 async function endGuessing() {
-    guess1.onclick = () => {
+    guess1.onclick = () => { // guess button does nothing
+    }
+    pass1.onclick = () => { // when guessing stops, pass should also stop working
     }
     checkIfLimitReached();
 }
@@ -207,7 +220,6 @@ async function checkIfLimitReached() {
         questionSelected[0].id = ""; // reusing this for an alert because I'm short on time
         questionSelected[0].innerText = "All questions have been answered or 15000 points have been obtained by at least one team.\n\nPlease move to the next round.";
         next1.onclick = () => {
-            console.log(`I need to send the users to a URL to page two with the values of ${aPtsVar} for Team A and ${bPtsVar} for Team B.`);
             document.location = roundTwo + aPtsVar + "&bPoints=" + bPtsVar;
             //! don't forget to test this
         }
